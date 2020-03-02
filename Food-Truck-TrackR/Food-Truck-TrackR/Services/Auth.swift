@@ -42,6 +42,7 @@ class AuthService {
             user.delete { error in
                 if let error = error {
                     completion(error)
+                    return 
                 } else {
                     // Account deleted.
                     completion(nil)
