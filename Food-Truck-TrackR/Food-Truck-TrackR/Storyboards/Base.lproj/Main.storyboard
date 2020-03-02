@@ -1,8 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Chf-oR-Vot">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <customFonts key="customFonts">
+        <array key="BluelineParadise.ttf">
+            <string>Blueline-Paradise</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Sign Up Or In View Controller-->
+        <scene sceneID="cq5-7d-0qV">
+            <objects>
+                <viewController id="Chf-oR-Vot" customClass="SignUpOrInViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mye-vQ-kdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CSy-PU-ugj">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Pe-1Z-mRZ">
+                                <rect key="frame" x="80" y="642" width="254" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TyK-EQ-w6m"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-HeavyItalic" family="Avenir Next Condensed" pointSize="25"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="s9O-O2-oUI" kind="presentation" modalPresentationStyle="fullScreen" id="3Pe-qj-bCM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vI-Sq-Umc">
+                                <rect key="frame" x="80" y="702" width="254" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XFM-8N-JPF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-HeavyItalic" family="Avenir Next Condensed" pointSize="25"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Truck  Tracker" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwZ-pj-veJ">
+                                <rect key="frame" x="20" y="240" width="374" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="EsR-4V-JJ6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Blueline-Paradise" family="Blueline Paradise" pointSize="75"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="DR0-Db-GLi" firstAttribute="trailing" secondItem="KwZ-pj-veJ" secondAttribute="trailing" constant="20" id="311-So-WaW"/>
+                            <constraint firstItem="KwZ-pj-veJ" firstAttribute="leading" secondItem="DR0-Db-GLi" secondAttribute="leading" constant="20" id="6Ar-an-QBg"/>
+                            <constraint firstItem="3Pe-1Z-mRZ" firstAttribute="leading" secondItem="DR0-Db-GLi" secondAttribute="leading" constant="80" id="7lw-sh-zcU"/>
+                            <constraint firstItem="DR0-Db-GLi" firstAttribute="trailing" secondItem="3Pe-1Z-mRZ" secondAttribute="trailing" constant="80" id="CD7-pN-OTF"/>
+                            <constraint firstItem="3Pe-1Z-mRZ" firstAttribute="top" secondItem="KwZ-pj-veJ" secondAttribute="bottom" constant="152" id="DyY-9X-tHW"/>
+                            <constraint firstItem="6vI-Sq-Umc" firstAttribute="leading" secondItem="DR0-Db-GLi" secondAttribute="leading" constant="80" id="NeJ-IM-n8t"/>
+                            <constraint firstItem="DR0-Db-GLi" firstAttribute="bottom" secondItem="6vI-Sq-Umc" secondAttribute="bottom" constant="120" id="QZs-Po-Vrf"/>
+                            <constraint firstItem="DR0-Db-GLi" firstAttribute="trailing" secondItem="6vI-Sq-Umc" secondAttribute="trailing" constant="80" id="b18-gc-WHr"/>
+                            <constraint firstItem="6vI-Sq-Umc" firstAttribute="top" secondItem="3Pe-1Z-mRZ" secondAttribute="bottom" constant="20" id="lGB-y6-N3v"/>
+                            <constraint firstItem="KwZ-pj-veJ" firstAttribute="top" secondItem="DR0-Db-GLi" secondAttribute="top" constant="196" id="wbd-iG-lWs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DR0-Db-GLi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aMc-R5-nVX"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="KwZ-pj-veJ" id="TEd-Ue-CvI"/>
+                        <outlet property="loginButton" destination="3Pe-1Z-mRZ" id="AAU-zq-F26"/>
+                        <outlet property="signUpButton" destination="6vI-Sq-Umc" id="NwK-mO-zrF"/>
+                        <outlet property="signUpOrInImageView" destination="CSy-PU-ugj" id="LYS-RL-Qqy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uyt-Af-vPi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1460.8695652173915" y="-274.55357142857139"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="ZM2-3j-l8N">
+            <objects>
+                <viewController id="s9O-O2-oUI" customClass="LoginViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qAk-KV-NfK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgP-bv-TYQ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food Truck  Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy7-hL-vaJ">
+                                <rect key="frame" x="20" y="240" width="374" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="pMX-Ud-IaO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Blueline-Paradise" family="Blueline Paradise" pointSize="75"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nCt-Jo-BQi" firstAttribute="trailing" secondItem="vy7-hL-vaJ" secondAttribute="trailing" constant="20" id="Ae2-g4-8V2"/>
+                            <constraint firstItem="vy7-hL-vaJ" firstAttribute="leading" secondItem="nCt-Jo-BQi" secondAttribute="leading" constant="20" id="UQx-2m-uXP"/>
+                            <constraint firstItem="vy7-hL-vaJ" firstAttribute="top" secondItem="nCt-Jo-BQi" secondAttribute="top" constant="196" id="wLz-TL-3oT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nCt-Jo-BQi"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2kx-dX-dVc"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="vy7-hL-vaJ" id="eMV-vv-AMT"/>
+                        <outlet property="loginImageView" destination="mgP-bv-TYQ" id="NVE-Wu-oBO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X6G-ev-fOd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1461" y="407"/>
+        </scene>
+    </scenes>
 </document>

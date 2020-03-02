@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C36777A240CA3E9006A494C /* SignUpOrInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C367779240CA3E9006A494C /* SignUpOrInViewController.swift */; };
+		4C36777C240CB217006A494C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C36777B240CB217006A494C /* LoginViewController.swift */; };
+		4C367780240CBB67006A494C /* BluelineParadise.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C36777F240CBB67006A494C /* BluelineParadise.ttf */; };
+		4C367782240CC3C7006A494C /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C367781240CC3C7006A494C /* BebasNeue-Regular.ttf */; };
+		4C367783240CC9E6006A494C /* BebasNeue-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C367781240CC3C7006A494C /* BebasNeue-Regular.ttf */; };
+		4C367784240CC9EF006A494C /* BluelineParadise.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C36777F240CBB67006A494C /* BluelineParadise.ttf */; };
 		4CA5838D240C90AA004B0E8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA5838C240C90AA004B0E8F /* AppDelegate.swift */; };
 		4CA5838F240C90AA004B0E8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA5838E240C90AA004B0E8F /* SceneDelegate.swift */; };
 		4CA58394240C90AA004B0E8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA58392240C90AA004B0E8F /* Main.storyboard */; };
@@ -26,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C367779240CA3E9006A494C /* SignUpOrInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOrInViewController.swift; sourceTree = "<group>"; };
+		4C36777B240CB217006A494C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4C36777F240CBB67006A494C /* BluelineParadise.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BluelineParadise.ttf; sourceTree = "<group>"; };
+		4C367781240CC3C7006A494C /* BebasNeue-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue-Regular.ttf"; sourceTree = "<group>"; };
 		4CA58389240C90AA004B0E8F /* Food-Truck-TrackR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food-Truck-TrackR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA5838C240C90AA004B0E8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CA5838E240C90AA004B0E8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +66,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C36777E240CBB3A006A494C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4C367781240CC3C7006A494C /* BebasNeue-Regular.ttf */,
+				4C36777F240CBB67006A494C /* BluelineParadise.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		4CA58380240C90AA004B0E8F = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +100,7 @@
 				4CA583A2240C90D3004B0E8F /* Models */,
 				4CA583A0240C90B9004B0E8F /* Resources */,
 				4CA583A1240C90C8004B0E8F /* Storyboards */,
+				4C36777E240CBB3A006A494C /* Fonts */,
 				4CA5839A240C90AA004B0E8F /* Info.plist */,
 			);
 			path = "Food-Truck-TrackR";
@@ -115,6 +135,8 @@
 		4CA583A3240C90D8004B0E8F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C367779240CA3E9006A494C /* SignUpOrInViewController.swift */,
+				4C36777B240CB217006A494C /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -209,7 +231,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C367782240CC3C7006A494C /* BebasNeue-Regular.ttf in Resources */,
 				4CA58399240C90AA004B0E8F /* LaunchScreen.storyboard in Resources */,
+				4C367780240CBB67006A494C /* BluelineParadise.ttf in Resources */,
 				4CA58396240C90AA004B0E8F /* Assets.xcassets in Resources */,
 				4CA58394240C90AA004B0E8F /* Main.storyboard in Resources */,
 			);
@@ -219,6 +243,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C367784240CC9EF006A494C /* BluelineParadise.ttf in Resources */,
+				4C367783240CC9E6006A494C /* BebasNeue-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C36777C240CB217006A494C /* LoginViewController.swift in Sources */,
 				4CA5838D240C90AA004B0E8F /* AppDelegate.swift in Sources */,
+				4C36777A240CA3E9006A494C /* SignUpOrInViewController.swift in Sources */,
 				4CA5838F240C90AA004B0E8F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
