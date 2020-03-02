@@ -9,7 +9,7 @@ target 'Food-Truck-TrackR' do
 
   pod 'Firebase'
   pod 'Firebase/Auth'
-
+  pod 'Firebase/Database'
 
   target 'Food-Truck-TrackRTests' do
     inherit! :search_paths
