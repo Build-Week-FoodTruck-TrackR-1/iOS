@@ -8,7 +8,7 @@
 
 import Foundation
 import FirebaseAuth
-
+///NICK
 class AuthService {
     
     typealias completion = Result<User?, Error>
