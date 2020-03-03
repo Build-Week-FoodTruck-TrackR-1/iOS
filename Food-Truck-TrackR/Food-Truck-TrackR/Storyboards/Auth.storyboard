@@ -42,7 +42,10 @@
                                             <constraint firstAttribute="width" constant="374" id="pzt-3O-01J"/>
                                             <constraint firstAttribute="height" constant="210" id="yz6-nz-PwV"/>
                                         </constraints>
-                                        <state key="normal" title="Trucker"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="Trucker">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="ChoiceTapped:" destination="Ndf-Pa-T6l" eventType="touchUpInside" id="PMz-kL-iZu"/>
                                         </connections>
@@ -54,7 +57,10 @@
                                             <constraint firstAttribute="height" constant="210" id="8OC-s0-p8r"/>
                                             <constraint firstAttribute="width" constant="374" id="Ldv-na-Wcs"/>
                                         </constraints>
-                                        <state key="normal" title="Foodie"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="Foodie">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="ChoiceTapped:" destination="Ndf-Pa-T6l" eventType="touchUpInside" id="rQB-S3-pzJ"/>
                                         </connections>
@@ -111,10 +117,13 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTx-so-hCO">
                                         <rect key="frame" x="0.0" y="153" width="366" height="60"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="336-x9-TKv"/>
                                         </constraints>
-                                        <state key="normal" title="Sign Up"/>
+                                        <state key="normal" title="Sign Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="authButtonTapped:" destination="AGx-GD-Z66" eventType="touchUpInside" id="lmj-aR-VQH"/>
                                         </connections>

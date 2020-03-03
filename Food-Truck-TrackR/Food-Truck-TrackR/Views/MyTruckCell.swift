@@ -10,10 +10,18 @@ import UIKit
 
 class MyTruckCell: UITableViewCell {
 
+    
+    //MARK: - IBOutlets
+    
     @IBOutlet weak var truckImageView: UIImageView!
     @IBOutlet weak var cuisineTypeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
+    
+    
+    
+    
+    //MARK:- Propeties
     
     static var id: String {
         return String(describing: self)
@@ -28,4 +36,7 @@ class MyTruckCell: UITableViewCell {
     private func updateViews() {
     
     }
+    
+    
+    
 }
