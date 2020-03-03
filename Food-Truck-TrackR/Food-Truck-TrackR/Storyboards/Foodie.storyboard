@@ -7,16 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Truck around you-->
+        <!--Trucks around you-->
         <scene sceneID="QQV-7D-oZO">
             <objects>
-                <viewController id="GXC-ww-SWP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrucksAroundViewController" id="GXC-ww-SWP" customClass="TrucksAroundViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IEp-Yb-tHU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qQL-nr-sc7">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -24,12 +24,13 @@
                             <constraint firstItem="qQL-nr-sc7" firstAttribute="leading" secondItem="ezG-6V-fkM" secondAttribute="leading" id="8dO-jx-9f9"/>
                             <constraint firstItem="qQL-nr-sc7" firstAttribute="trailing" secondItem="ezG-6V-fkM" secondAttribute="trailing" id="MJY-8H-ZRI"/>
                             <constraint firstItem="qQL-nr-sc7" firstAttribute="top" secondItem="ezG-6V-fkM" secondAttribute="top" id="PiF-Zr-aZj"/>
-                            <constraint firstItem="qQL-nr-sc7" firstAttribute="bottom" secondItem="ezG-6V-fkM" secondAttribute="bottom" id="cnf-Pu-bn7"/>
+                            <constraint firstItem="qQL-nr-sc7" firstAttribute="bottom" secondItem="ezG-6V-fkM" secondAttribute="bottom" constant="34" id="cnf-Pu-bn7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ezG-6V-fkM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Truck around you" id="rZc-LB-AD4"/>
+                    <navigationItem key="navigationItem" title="Trucks around you" id="rZc-LB-AD4"/>
                     <connections>
+                        <outlet property="mapView" destination="qQL-nr-sc7" id="vQc-Je-eBP"/>
                         <segue destination="6zC-Qo-3HW" kind="show" identifier="ViewMenuVC" id="Tll-cU-KgB"/>
                     </connections>
                 </viewController>
@@ -58,7 +59,7 @@
         <!--TruckName menu-->
         <scene sceneID="FFL-Pa-gQP">
             <objects>
-                <viewController id="6zC-Qo-3HW" sceneMemberID="viewController">
+                <viewController id="6zC-Qo-3HW" customClass="TruckMenuViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Zd-NZ-Off">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +68,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TruckMenuCell" rowHeight="146" id="q4V-73-Oue">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" rowHeight="146" id="q4V-73-Oue" customClass="MenuCell" customModule="Food_Truck_TrackR" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="146"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q4V-73-Oue" id="TQu-u5-U55">
@@ -80,19 +81,19 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="AVX-Lo-hhu">
                                                             <rect key="frame" x="0.0" y="5.5" width="276" height="113.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTY-Bn-XcF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTY-Bn-XcF">
                                                                     <rect key="frame" x="0.0" y="0.0" width="276" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbH-OE-5Wz">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbH-OE-5Wz">
                                                                     <rect key="frame" x="0.0" y="46.5" width="276" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$7.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYa-XM-fiV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$7.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYa-XM-fiV">
                                                                     <rect key="frame" x="0.0" y="93" width="276" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -116,8 +117,18 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="I50-Si-1IR" secondAttribute="bottom" id="aUz-dl-Xl4"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="IbH-OE-5Wz" id="ZgR-Mh-Gjj"/>
+                                            <outlet property="menuImageView" destination="eAo-in-gwM" id="WWn-h0-A7a"/>
+                                            <outlet property="nameLabel" destination="BTY-Bn-XcF" id="zta-PX-pT9"/>
+                                            <outlet property="priceLabel" destination="FYa-XM-fiV" id="RI6-6p-76E"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6zC-Qo-3HW" id="Ofd-lH-5HA"/>
+                                    <outlet property="delegate" destination="6zC-Qo-3HW" id="ac7-z9-xY8"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -130,6 +141,9 @@
                         <viewLayoutGuide key="safeArea" id="GcD-Uq-vHJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="TruckName menu" id="cjO-hK-f7J"/>
+                    <connections>
+                        <outlet property="tableView" destination="oi1-jN-tij" id="Xa7-Ol-PUL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzL-vX-rd9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -62,15 +62,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Uc7-ha-X7x" firstAttribute="bottom" secondItem="84A-qh-UKG" secondAttribute="bottom" constant="154" id="I6x-7e-gzu"/>
-                            <constraint firstItem="84A-qh-UKG" firstAttribute="leading" secondItem="Uc7-ha-X7x" secondAttribute="leading" constant="20" id="IKe-9w-XHA"/>
-                            <constraint firstItem="Uc7-ha-X7x" firstAttribute="trailing" secondItem="84A-qh-UKG" secondAttribute="trailing" constant="20" id="Wos-Fa-S6A"/>
+                            <constraint firstItem="84A-qh-UKG" firstAttribute="top" secondItem="Uc7-ha-X7x" secondAttribute="top" constant="59.5" id="3Md-Ki-Lgq"/>
+                            <constraint firstItem="84A-qh-UKG" firstAttribute="centerX" secondItem="N99-nf-mJC" secondAttribute="centerX" id="eCR-4N-VSd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uc7-ha-X7x"/>
                     </view>
                     <navigationItem key="navigationItem" id="vMd-lm-5io"/>
                     <connections>
-                        <segue destination="AGx-GD-Z66" kind="show" identifier="AuthSegue" id="d0b-U2-cPM"/>
+                        <segue destination="AGx-GD-Z66" kind="show" identifier="AuthSegue" id="w77-Eq-cDm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HZ8-kO-PC0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -80,49 +79,42 @@
         <!--Auth View Controller-->
         <scene sceneID="MfH-RA-1R7">
             <objects>
-                <viewController storyboardIdentifier="AuthViewController" id="AGx-GD-Z66" customClass="AuthViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="AGx-GD-Z66" customClass="AuthViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SOz-uH-tJN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="8B1-Uc-Kte">
-                                <rect key="frame" x="20" y="225" width="374" height="213"/>
+                                <rect key="frame" x="24" y="225" width="366" height="213"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9qA-7n-vHx">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="32"/>
                                         <segments>
-                                            <segment title="Register"/>
+                                            <segment title="Sign Up"/>
                                             <segment title="Log In"/>
                                         </segments>
                                         <connections>
-                                            <action selector="ChoiceValueChanged:" destination="AGx-GD-Z66" eventType="valueChanged" id="uGq-bl-4tP"/>
+                                            <action selector="ChoiceValueChanged:" destination="AGx-GD-Z66" eventType="valueChanged" id="CVP-ND-mUn"/>
                                         </connections>
                                     </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yba-cd-swy">
-                                        <rect key="frame" x="0.0" y="49" width="374" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="374" id="EsX-kt-U5d"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="49" width="366" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Lh-kB-gI8">
-                                        <rect key="frame" x="0.0" y="101" width="374" height="34"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="374" id="e4O-7x-scW"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="101" width="366" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTx-so-hCO">
-                                        <rect key="frame" x="0.0" y="153" width="374" height="60"/>
+                                        <rect key="frame" x="0.0" y="153" width="366" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="336-x9-TKv"/>
-                                            <constraint firstAttribute="width" constant="374" id="M0r-te-HpT"/>
                                         </constraints>
-                                        <state key="normal" title="Register"/>
+                                        <state key="normal" title="Sign Up"/>
                                         <connections>
-                                            <action selector="authButtonTapped:" destination="AGx-GD-Z66" eventType="touchUpInside" id="5uZ-Y7-m1M"/>
+                                            <action selector="authButtonTapped:" destination="AGx-GD-Z66" eventType="touchUpInside" id="lmj-aR-VQH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -130,18 +122,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="8B1-Uc-Kte" firstAttribute="leading" secondItem="qfz-OD-RYC" secondAttribute="leading" constant="20" id="BT3-SN-efK"/>
-                            <constraint firstItem="qfz-OD-RYC" firstAttribute="trailing" secondItem="8B1-Uc-Kte" secondAttribute="trailing" constant="20" id="C58-gf-ZWX"/>
-                            <constraint firstItem="qfz-OD-RYC" firstAttribute="bottom" secondItem="8B1-Uc-Kte" secondAttribute="bottom" constant="424" id="NoR-r0-x2S"/>
+                            <constraint firstItem="qfz-OD-RYC" firstAttribute="trailing" secondItem="8B1-Uc-Kte" secondAttribute="trailing" constant="24" id="KSI-O6-JM7"/>
+                            <constraint firstItem="8B1-Uc-Kte" firstAttribute="leading" secondItem="qfz-OD-RYC" secondAttribute="leading" constant="24" id="eQC-yn-7MN"/>
+                            <constraint firstItem="qfz-OD-RYC" firstAttribute="bottom" secondItem="8B1-Uc-Kte" secondAttribute="bottom" constant="424" id="y4o-3w-mQA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qfz-OD-RYC"/>
                     </view>
                     <navigationItem key="navigationItem" id="77S-nr-EZC"/>
                     <connections>
-                        <outlet property="authButton" destination="ZTx-so-hCO" id="bNt-hc-5Ft"/>
-                        <outlet property="passwordField" destination="6Lh-kB-gI8" id="gqW-zt-OVk"/>
-                        <outlet property="segmentedControl" destination="9qA-7n-vHx" id="zw7-IG-dzO"/>
-                        <outlet property="usernameField" destination="yba-cd-swy" id="LDz-5l-bNX"/>
+                        <outlet property="authButton" destination="ZTx-so-hCO" id="bi1-QB-hZK"/>
+                        <outlet property="passwordField" destination="6Lh-kB-gI8" id="YSu-gU-xJQ"/>
+                        <outlet property="segmentedControl" destination="9qA-7n-vHx" id="Wk2-Kl-jGK"/>
+                        <outlet property="usernameField" destination="yba-cd-swy" id="uhJ-Pv-hlu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0K-FO-Uy3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

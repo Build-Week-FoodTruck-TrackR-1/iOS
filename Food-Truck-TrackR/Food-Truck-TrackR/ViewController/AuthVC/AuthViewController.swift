@@ -10,7 +10,6 @@ import UIKit
 
 class AuthViewController: UIViewController {
     
-    
     // MARK: - Properties
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -20,6 +19,11 @@ class AuthViewController: UIViewController {
     
     var choice = Choice.trucker
     var authStatus = AuthStatus.signUp
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "\(choice)".capitalized
+    }
     
     // MARK: - Functions
     
@@ -32,10 +36,10 @@ class AuthViewController: UIViewController {
         
         if sender.selectedSegmentIndex == 0 {
             authStatus = .signUp
-            authButton.setTitle("Sign Up", for: .normal)
+            authButton.setTitle(authStatus.description, for: .normal)
         } else {
-            authStatus = .signUp
-            authButton.setTitle("Log In", for: .normal)
+            authStatus = .logIn
+            authButton.setTitle(authStatus.description, for: .normal)
         }
     }
     
@@ -45,15 +49,27 @@ class AuthViewController: UIViewController {
             let pass = passwordField.text, !pass.isEmpty {
             // Verify auth status state
             if authStatus == .signUp {
-                let storyboard = UIStoryboard(name: Storyboard.Foodie.rawValue, bundle: Bundle.main)
-                let vc = storyboard.instantiateViewController(identifier: MyTrucksViewController.id) as! MyTrucksViewController
-                self.present(vc, animated: true, completion: nil)
+                goToStoryboard()
             } else {
                 //Login user
-                let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: Bundle.main)
-                let vc = storyboard.instantiateViewController(identifier: MyTrucksViewController.id) as! MyTrucksViewController
-                self.present(vc, animated: true, completion: nil)
+                goToStoryboard()
             }
+        }
+    }
+    
+    func goToStoryboard() {
+        if choice == .trucker {
+            let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: nil)
+            let nav = storyboard.instantiateViewController(withIdentifier: "TruckerNav") as! UINavigationController
+            let _ = nav.topViewController as! MyTrucksViewController
+            nav.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(nav, animated: true, completion: nil)
+        } else {
+            let storyboard = UIStoryboard(name: Storyboard.Foodie.rawValue, bundle: nil)
+            let nav = storyboard.instantiateViewController(withIdentifier: "FoodieNav") as! UINavigationController
+            let _ = nav.topViewController as! TrucksAroundViewController
+            nav.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(nav, animated: true, completion: nil)
         }
     }
 }

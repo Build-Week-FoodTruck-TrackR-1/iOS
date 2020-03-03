@@ -19,14 +19,13 @@ class WelcomeViewController: UIViewController {
         if sender.tag == 0 {
             performSegue(withIdentifier: Segue.AuthSegue.rawValue, sender: Choice.trucker)
         } else {
-            performSegue(withIdentifier: Segue.AuthSegue.rawValue, sender: Choice.trucker)
+            performSegue(withIdentifier: Segue.AuthSegue.rawValue, sender: Choice.foodie)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segue.AuthSegue.rawValue {
-            let destination = segue.destination as! AuthViewController
-            if let choice = sender as? Choice {
+            if let destination = segue.destination as? AuthViewController,  let choice = sender as? Choice {
                 destination.choice = choice
             }
         }

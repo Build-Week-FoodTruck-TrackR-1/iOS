@@ -10,15 +10,13 @@ import UIKit
 
 class MyTrucksViewController: UIViewController {
     
-    // This returns the id of the viewController
-    static var id: String {
-        String(describing: self)
-    }
+    @IBOutlet weak var tableView: UITableView!
+    
+    var trucks = [Truck]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 
@@ -33,3 +31,29 @@ class MyTrucksViewController: UIViewController {
     */
 
 }
+
+// MARK: - UITableViewDelegate/UITableViewDataSource
+extension MyTrucksViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyTruckCell.id, for: indexPath) as? MyTruckCell else { return UITableViewCell() }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 112.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
+

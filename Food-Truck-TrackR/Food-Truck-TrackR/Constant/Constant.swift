@@ -14,15 +14,24 @@ enum Segue: String {
 }
 
 // Choice Trucker/Food
-enum Choice {
+enum Choice: String {
     case trucker
     case foodie
 }
 
 // Auth Status SignUp/Login
-enum AuthStatus {
+enum AuthStatus: CustomStringConvertible {
     case signUp
     case logIn
+    
+    var description: String {
+        switch self {
+        case .signUp:
+            return "Sign Up"
+        case .logIn:
+            return "Log In"
+        }
+    }
 }
 
 // Storyboards name
