@@ -10,26 +10,87 @@ import UIKit
 import MapKit
 import CoreLocation
 
-// This for Kerby to do
 
 class TrucksAroundViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: MKMapView!
+    
+    var locationController = LocationController()
+    var trucks = [Truck]()
+    
+    private enum AnnotationReuseID: String {
+        case pin
+    }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationController.locationDataDelegate = self
+        locationController.requestLocation()
+        locationController.enableLocationServices()
+        mapView.setUserTrackingMode(.follow, animated: true)
+        mapView.delegate = self
+        // Make sure `MKPinAnnotationView` and the reuse identifier is recognized in this map view.
+        mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
+        trucks = [Truck(physicalLocation: "14212 NE 3RD CT", name: "Food truck", longitude: Int64(-80.212550), latitude: Int64(25.919600), imageOfTruck: URL(string: "test")!, customerRatings: [5], customerRatingAvg: 17, cusinseType: "")]
+        locationController.addAnnotations(trucks: trucks)
+    }
+}
 
+// MARK: - MKMapViewDelegate
+
+extension TrucksAroundViewController: MKMapViewDelegate {
+    
+    func mapViewDidFailLoadingMap(_ mapView: MKMapView, withError error: Error) {
+        print("Failed to load the map: \(error)")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? PlaceAnnotation else { return nil }
+        
+        // Annotation views should be dequeued from a reuse queue to be efficent.
+        let view = mapView.dequeueReusableAnnotationView(withIdentifier: AnnotationReuseID.pin.rawValue, for: annotation) as? MKMarkerAnnotationView
+        view?.canShowCallout = true
+        return view
     }
-    */
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let annotation = view.annotation as? PlaceAnnotation else { return }
+        if let url = annotation.url {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+    }
+}
 
+extension TrucksAroundViewController: LocationDataDelegate {
+    
+    func addAnnotation(_ annotations: [PlaceAnnotation]) {
+        print(annotations.count)
+        mapView.addAnnotations(annotations)
+    }
+    
+    func selectedAnnotation(_ title: String) {
+        
+    }
+    
+    func deselectedAnnotation() {
+        
+    }
+    
+    func addRegion(_ region: MKCoordinateRegion) {
+        
+    }
+    
+    func addCenterCoordinate(_ coordinate: CLLocationCoordinate2D) {
+        
+    }
+    
+    func addCamera(_ camera: MKMapCamera) {
+        
+    }
 }
