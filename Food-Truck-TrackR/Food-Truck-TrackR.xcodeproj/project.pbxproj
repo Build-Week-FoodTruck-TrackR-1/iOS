@@ -15,11 +15,12 @@
 		4CA58399240C90AA004B0E8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA58397240C90AA004B0E8F /* LaunchScreen.storyboard */; };
 		4CA583AB240C90FA004B0E8F /* Food_Truck_TrackRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA583AA240C90FA004B0E8F /* Food_Truck_TrackRTests.swift */; };
 		6D47A0FF240DA88C0085BEFA /* Truck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47A0FE240DA88C0085BEFA /* Truck.swift */; };
-		6D47A101240DA8A20085BEFA /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47A100240DA8A20085BEFA /* Users.swift */; };
 		6D4F925A240E4C950095DE2F /* TrucksAroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F9259240E4C950095DE2F /* TrucksAroundViewController.swift */; };
 		6D4F925D240E50630095DE2F /* MyTruckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F925C240E50630095DE2F /* MyTruckCell.swift */; };
 		6D4F925F240E525B0095DE2F /* TruckMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F925E240E525B0095DE2F /* TruckMenuViewController.swift */; };
 		6D4F9261240E530A0095DE2F /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F9260240E530A0095DE2F /* MenuCell.swift */; };
+		6D4F9263240EBF3A0095DE2F /* CreateTruckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F9262240EBF3A0095DE2F /* CreateTruckViewController.swift */; };
+		6D4F9265240EC2470095DE2F /* Foodie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F9264240EC2470095DE2F /* Foodie.swift */; };
 		6D5A8346240DB99D007EFA11 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A8345240DB99C007EFA11 /* AuthViewController.swift */; };
 		6D5A8348240E1FCC007EFA11 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A8347240E1FCC007EFA11 /* Auth.storyboard */; };
 		6D5A834A240E2297007EFA11 /* Trucker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A8349240E2297007EFA11 /* Trucker.storyboard */; };
@@ -28,7 +29,7 @@
 		6D5A8352240E2C08007EFA11 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A8351240E2C08007EFA11 /* Constant.swift */; };
 		6D7F9444240E319E00E57201 /* MyTrucksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7F9443240E319E00E57201 /* MyTrucksViewController.swift */; };
 		6D91C47A240D8D07000581F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D91C479240D8D07000581F0 /* GoogleService-Info.plist */; };
-		6D91C47D240D8D48000581F0 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91C47C240D8D48000581F0 /* Auth.swift */; };
+		6D91C47D240D8D48000581F0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91C47C240D8D48000581F0 /* AuthService.swift */; };
 		6DADD286240D9DA100CA09B3 /* TruckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADD285240D9DA100CA09B3 /* TruckService.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,11 +57,12 @@
 		577AFCC42E40E0BC6D6656F9 /* Pods-Food-Truck-TrackRTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food-Truck-TrackRTests.release.xcconfig"; path = "Target Support Files/Pods-Food-Truck-TrackRTests/Pods-Food-Truck-TrackRTests.release.xcconfig"; sourceTree = "<group>"; };
 		653791921C6D393D08438D30 /* Pods-Food-Truck-TrackR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food-Truck-TrackR.release.xcconfig"; path = "Target Support Files/Pods-Food-Truck-TrackR/Pods-Food-Truck-TrackR.release.xcconfig"; sourceTree = "<group>"; };
 		6D47A0FE240DA88C0085BEFA /* Truck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truck.swift; sourceTree = "<group>"; };
-		6D47A100240DA8A20085BEFA /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		6D4F9259240E4C950095DE2F /* TrucksAroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrucksAroundViewController.swift; sourceTree = "<group>"; };
 		6D4F925C240E50630095DE2F /* MyTruckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTruckCell.swift; sourceTree = "<group>"; };
 		6D4F925E240E525B0095DE2F /* TruckMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruckMenuViewController.swift; sourceTree = "<group>"; };
 		6D4F9260240E530A0095DE2F /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		6D4F9262240EBF3A0095DE2F /* CreateTruckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTruckViewController.swift; sourceTree = "<group>"; };
+		6D4F9264240EC2470095DE2F /* Foodie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foodie.swift; sourceTree = "<group>"; };
 		6D5A8345240DB99C007EFA11 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		6D5A8347240E1FCC007EFA11 /* Auth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		6D5A8349240E2297007EFA11 /* Trucker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trucker.storyboard; sourceTree = "<group>"; };
@@ -69,7 +71,7 @@
 		6D5A8351240E2C08007EFA11 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		6D7F9443240E319E00E57201 /* MyTrucksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrucksViewController.swift; sourceTree = "<group>"; };
 		6D91C479240D8D07000581F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6D91C47C240D8D48000581F0 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		6D91C47C240D8D48000581F0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6DADD285240D9DA100CA09B3 /* TruckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruckService.swift; sourceTree = "<group>"; };
 		9496AD3465646C6A6A50984F /* Pods-Food-Truck-TrackRTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food-Truck-TrackRTests.debug.xcconfig"; path = "Target Support Files/Pods-Food-Truck-TrackRTests/Pods-Food-Truck-TrackRTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E8FB0B57C570E09D9D4ADC5D /* Pods_Food_Truck_TrackRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food_Truck_TrackRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +178,7 @@
 		6D47A0FC240DA7210085BEFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6D47A100240DA8A20085BEFA /* Users.swift */,
+				6D4F9264240EC2470095DE2F /* Foodie.swift */,
 				6D47A0FE240DA88C0085BEFA /* Truck.swift */,
 			);
 			path = Model;
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				6D7F9443240E319E00E57201 /* MyTrucksViewController.swift */,
+				6D4F9262240EBF3A0095DE2F /* CreateTruckViewController.swift */,
 			);
 			path = TruckerVC;
 			sourceTree = "<group>";
@@ -229,7 +232,7 @@
 		6D91C47B240D8D34000581F0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6D91C47C240D8D48000581F0 /* Auth.swift */,
+				6D91C47C240D8D48000581F0 /* AuthService.swift */,
 				6DADD285240D9DA100CA09B3 /* TruckService.swift */,
 			);
 			path = Services;
@@ -431,11 +434,12 @@
 				6D4F925D240E50630095DE2F /* MyTruckCell.swift in Sources */,
 				4CA5838D240C90AA004B0E8F /* AppDelegate.swift in Sources */,
 				6D4F925F240E525B0095DE2F /* TruckMenuViewController.swift in Sources */,
+				6D4F9265240EC2470095DE2F /* Foodie.swift in Sources */,
 				4CA5838F240C90AA004B0E8F /* SceneDelegate.swift in Sources */,
 				6D7F9444240E319E00E57201 /* MyTrucksViewController.swift in Sources */,
 				6D47A0FF240DA88C0085BEFA /* Truck.swift in Sources */,
-				6D91C47D240D8D48000581F0 /* Auth.swift in Sources */,
-				6D47A101240DA8A20085BEFA /* Users.swift in Sources */,
+				6D91C47D240D8D48000581F0 /* AuthService.swift in Sources */,
+				6D4F9263240EBF3A0095DE2F /* CreateTruckViewController.swift in Sources */,
 				6D5A8352240E2C08007EFA11 /* Constant.swift in Sources */,
 				6DADD286240D9DA100CA09B3 /* TruckService.swift in Sources */,
 			);

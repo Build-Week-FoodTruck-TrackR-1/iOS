@@ -1,5 +1,5 @@
 //
-//  Users.swift
+//  Foodie.swift
 //  Food-Truck-TrackR
 //
 //  Created by Kerby Jean on 3/2/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Users {
+struct Foodie {
     let username: String?
     let password: String?
 }
