@@ -26,6 +26,6 @@ class MenuCell: UITableViewCell {
     }
     
     private func updateViews() {
-    
+        
     }
 }

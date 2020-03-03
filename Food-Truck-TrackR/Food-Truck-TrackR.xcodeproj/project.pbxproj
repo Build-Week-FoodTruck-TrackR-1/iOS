@@ -17,6 +17,8 @@
 		6D0487CB240EDAF7003E4414 /* PlaceAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0487CA240EDAF7003E4414 /* PlaceAnnotation.swift */; };
 		6D0487CD240EDB9A003E4414 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0487CC240EDB9A003E4414 /* LocationService.swift */; };
 		6D0487CF240EE2A4003E4414 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0487CE240EE2A4003E4414 /* Protocols.swift */; };
+		6D0487D1240F046C003E4414 /* AddMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0487D0240F046C003E4414 /* AddMenuViewController.swift */; };
+		6D0487D3240F04D6003E4414 /* AddTruckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0487D2240F04D6003E4414 /* AddTruckViewController.swift */; };
 		6D47A0FF240DA88C0085BEFA /* Truck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47A0FE240DA88C0085BEFA /* Truck.swift */; };
 		6D4F925A240E4C950095DE2F /* TrucksAroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F9259240E4C950095DE2F /* TrucksAroundViewController.swift */; };
 		6D4F925D240E50630095DE2F /* MyTruckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4F925C240E50630095DE2F /* MyTruckCell.swift */; };
@@ -70,6 +72,8 @@
 		6D0487CA240EDAF7003E4414 /* PlaceAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceAnnotation.swift; sourceTree = "<group>"; };
 		6D0487CC240EDB9A003E4414 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		6D0487CE240EE2A4003E4414 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		6D0487D0240F046C003E4414 /* AddMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuViewController.swift; sourceTree = "<group>"; };
+		6D0487D2240F04D6003E4414 /* AddTruckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTruckViewController.swift; sourceTree = "<group>"; };
 		6D47A0FE240DA88C0085BEFA /* Truck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truck.swift; sourceTree = "<group>"; };
 		6D4F9259240E4C950095DE2F /* TrucksAroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrucksAroundViewController.swift; sourceTree = "<group>"; };
 		6D4F925C240E50630095DE2F /* MyTruckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTruckCell.swift; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 			children = (
 				6D7F9443240E319E00E57201 /* MyTrucksViewController.swift */,
 				6D4F9262240EBF3A0095DE2F /* CreateTruckViewController.swift */,
+				6D0487D0240F046C003E4414 /* AddMenuViewController.swift */,
+				6D0487D2240F04D6003E4414 /* AddTruckViewController.swift */,
 			);
 			path = TruckerVC;
 			sourceTree = "<group>";
@@ -487,7 +493,9 @@
 			files = (
 				6D4F9261240E530A0095DE2F /* MenuCell.swift in Sources */,
 				6D5A8346240DB99D007EFA11 /* AuthViewController.swift in Sources */,
+				6D0487D1240F046C003E4414 /* AddMenuViewController.swift in Sources */,
 				6D5A834F240E2B37007EFA11 /* WelcomeViewController.swift in Sources */,
+				6D0487D3240F04D6003E4414 /* AddTruckViewController.swift in Sources */,
 				6D4F925A240E4C950095DE2F /* TrucksAroundViewController.swift in Sources */,
 				6D4F925D240E50630095DE2F /* MyTruckCell.swift in Sources */,
 				4CA5838D240C90AA004B0E8F /* AppDelegate.swift in Sources */,

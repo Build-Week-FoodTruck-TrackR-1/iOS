@@ -15,7 +15,6 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func ChoiceTapped(_ sender: UIButton) {
         /// Button title as a choice Trucker/Foodie
-        
         if sender.tag == 0 {
             performSegue(withIdentifier: Segue.AuthSegue.rawValue, sender: Choice.trucker)
         } else {

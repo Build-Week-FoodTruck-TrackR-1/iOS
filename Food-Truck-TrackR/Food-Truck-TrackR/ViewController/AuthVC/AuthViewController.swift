@@ -27,146 +27,96 @@ class AuthViewController: UIViewController {
     
     // MARK: - Functions
     
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- @IBAction func authButtonTapped(_ sender: UIButton) {
-        authenticateUser()
-    }
-    
-    
-    @IBAction func ChoiceValueChanged(_ sender: UISegmentedControl) {
+     @IBAction func authButtonTapped(_ sender: UIButton) {
         
-        if sender.selectedSegmentIndex == 0 {
-            authStatus = .signUp
-            authButton.setTitle(authStatus.description, for: .normal)
-        } else {
-            authStatus = .logIn
-            authButton.setTitle(authStatus.description, for: .normal)
-        }
-    }
-    
-    
-    func authenticateUser() {
-        if let username = usernameField.text, !username.isEmpty,
-            let pass = passwordField.text, !pass.isEmpty {
-            // Verify auth status state
-            if authStatus == .signUp {
-                goToStoryboard()
+            guard let username = usernameField.text, !username.isEmpty, let password = passwordField.text, !password.isEmpty else { return }
+            
+            let newUserSignUp = Foodie(email: username, password: password)
+            let newUserLogin = UserLogin(username: username, password: password)
+            if self.choice == Choice.foodie {
+                switch authStatus {
+                case .signUp:
+                    apiServices.dinerSignUp(diner: newUserSignUp) { _ in
+                        DispatchQueue.main.async {
+                            let alertController = UIAlertController(title: "Sign Up Successful!", message: "Please Log In...", preferredStyle: .alert)
+                            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                            alertController.addAction(alertAction)
+                            self.present(alertController, animated: true) {
+                                self.authStatus = .logIn
+                                self.segmentedControl.selectedSegmentIndex = 1
+                                self.authButton.setTitle("Log In", for: .normal)
+                        }
+                    }
+                }
+                case .logIn:
+                    apiServices.dinerLogin(diner: newUserLogin) { _ in
+                        self.goToStoryboard()
+                    }
+                }
             } else {
-                //Login user
-                goToStoryboard()
+                switch authStatus {
+                case .signUp:
+                    apiServices.operatorSignUp(truckOperator: newUserSignUp) { _ in
+                        DispatchQueue.main.async {
+                                let alertController = UIAlertController(title: "Sign Up Successful!", message: "Please Log In...", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                alertController.addAction(alertAction)
+                                self.present(alertController, animated: true) {
+                                    self.authStatus = .logIn
+                                    self.segmentedControl.selectedSegmentIndex = 1
+                                    self.authButton.setTitle("Log In", for: .normal)
+                            }
+                        }
+                    }
+                case .logIn:
+                    apiServices.operatorLogin(truckOperator: newUserLogin) { _ in
+                        self.goToStoryboard()
+                    }
+                }
             }
         }
-    }
-    
-    func goToStoryboard() {
-        if choice == .trucker {
-            let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: nil)
-            let nav = storyboard.instantiateViewController(withIdentifier: "TruckerNav") as! UINavigationController
-            let _ = nav.topViewController as! MyTrucksViewController
-            nav.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(nav, animated: true, completion: nil)
-        } else {
-            let storyboard = UIStoryboard(name: Storyboard.Foodie.rawValue, bundle: nil)
-            let nav = storyboard.instantiateViewController(withIdentifier: "FoodieNav") as! UINavigationController
-            let _ = nav.topViewController as! TrucksAroundViewController
-            nav.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(nav, animated: true, completion: nil)
+        
+        @IBAction func ChoiceValueChanged(_ sender: UISegmentedControl) {
+            
+            if sender.selectedSegmentIndex == 0 {
+                authStatus = .signUp
+                authButton.setTitle(authStatus.description, for: .normal)
+            } else {
+                authStatus = .logIn
+                authButton.setTitle(authStatus.description, for: .normal)
+            }
         }
-    }
+        
+        
+    //    func authenticateUser() {
+    //        if let username = usernameField.text, !username.isEmpty,
+    //            let pass = passwordField.text, !pass.isEmpty {
+    //            // Verify auth status state
+    //            if authStatus == .signUp {
+    //                goToStoryboard()
+    //            } else {
+    //                //Login user
+    //                goToStoryboard()
+    //            }
+    //        }
+    //    }
+        
+        func goToStoryboard() {
+            if choice == .trucker {
+                let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: nil)
+                let nav = storyboard.instantiateViewController(withIdentifier: "TruckerNav") as! UINavigationController
+                let _ = nav.topViewController as! MyTrucksViewController
+                nav.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(nav, animated: true, completion: nil)
+            } else {
+                let storyboard = UIStoryboard(name: Storyboard.Foodie.rawValue, bundle: nil)
+                let nav = storyboard.instantiateViewController(withIdentifier: "FoodieNav") as! UINavigationController
+                let _ = nav.topViewController as! TrucksAroundViewController
+                nav.modalPresentationStyle = .fullScreen
+                self.navigationController?.present(nav, animated: true, completion: nil)
+            }
+        }
+    
+    
+    let apiServices = APIServices()
 }
-

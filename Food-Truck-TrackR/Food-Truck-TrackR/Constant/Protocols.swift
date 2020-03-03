@@ -17,3 +17,7 @@ protocol LocationDataDelegate : NSObjectProtocol {
     func addCenterCoordinate(_ coordinate: CLLocationCoordinate2D)
     func addCamera(_ camera: MKMapCamera)
 }
+
+protocol AddTruckViewControllerDelegate: AnyObject {
+  func didAddTruck(truck: Truck)
+}
