@@ -31,6 +31,14 @@
 		6D91C47A240D8D07000581F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D91C479240D8D07000581F0 /* GoogleService-Info.plist */; };
 		6D91C47D240D8D48000581F0 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91C47C240D8D48000581F0 /* AuthService.swift */; };
 		6DADD286240D9DA100CA09B3 /* TruckService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DADD285240D9DA100CA09B3 /* TruckService.swift */; };
+		B68C36C4240ED27800D1F04B /* FoodTruck.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B68C36C2240ED27800D1F04B /* FoodTruck.xcdatamodeld */; };
+		B68C36C7240ED29300D1F04B /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36C6240ED29300D1F04B /* CoreDataStack.swift */; };
+		B68C36C9240ED48600D1F04B /* JSONTruck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36C8240ED48600D1F04B /* JSONTruck.swift */; };
+		B68C36CB240ED4A500D1F04B /* JSONMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36CA240ED4A500D1F04B /* JSONMenuItem.swift */; };
+		B68C36CD240ED4DD00D1F04B /* NetworkingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36CC240ED4DD00D1F04B /* NetworkingServices.swift */; };
+		B68C36D0240ED53C00D1F04B /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36CF240ED53C00D1F04B /* Bearer.swift */; };
+		B68C36D2240ED58F00D1F04B /* Truck + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36D1240ED58F00D1F04B /* Truck + Ext.swift */; };
+		B68C36D5240ED5E700D1F04B /* MenuItem + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68C36D4240ED5E700D1F04B /* MenuItem + Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +82,14 @@
 		6D91C47C240D8D48000581F0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6DADD285240D9DA100CA09B3 /* TruckService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruckService.swift; sourceTree = "<group>"; };
 		9496AD3465646C6A6A50984F /* Pods-Food-Truck-TrackRTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food-Truck-TrackRTests.debug.xcconfig"; path = "Target Support Files/Pods-Food-Truck-TrackRTests/Pods-Food-Truck-TrackRTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B68C36C3240ED27800D1F04B /* FoodTruck.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodTruck.xcdatamodel; sourceTree = "<group>"; };
+		B68C36C6240ED29300D1F04B /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		B68C36C8240ED48600D1F04B /* JSONTruck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTruck.swift; sourceTree = "<group>"; };
+		B68C36CA240ED4A500D1F04B /* JSONMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONMenuItem.swift; sourceTree = "<group>"; };
+		B68C36CC240ED4DD00D1F04B /* NetworkingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServices.swift; sourceTree = "<group>"; };
+		B68C36CF240ED53C00D1F04B /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		B68C36D1240ED58F00D1F04B /* Truck + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Truck + Ext.swift"; sourceTree = "<group>"; };
+		B68C36D4240ED5E700D1F04B /* MenuItem + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuItem + Ext.swift"; sourceTree = "<group>"; };
 		E8FB0B57C570E09D9D4ADC5D /* Pods_Food_Truck_TrackRTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food_Truck_TrackRTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFE3E2D80E91B01A14B8F585 /* Pods-Food-Truck-TrackR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food-Truck-TrackR.debug.xcconfig"; path = "Target Support Files/Pods-Food-Truck-TrackR/Pods-Food-Truck-TrackR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +146,8 @@
 				4CA583A1240C90C8004B0E8F /* Storyboards */,
 				4CA5839A240C90AA004B0E8F /* Info.plist */,
 				6D91C479240D8D07000581F0 /* GoogleService-Info.plist */,
+				B68C36CE240ED4FB00D1F04B /* Networking */,
+				B68C36D3240ED59400D1F04B /* Representation + Ext */,
 			);
 			path = "Food-Truck-TrackR";
 			sourceTree = "<group>";
@@ -190,6 +208,7 @@
 				6D9BA496240E33B7009BB3A0 /* FoodieVC */,
 				6D7F9442240E318300E57201 /* TruckerVC */,
 				6D5A834D240E2B21007EFA11 /* AuthVC */,
+				B68C36C5240ED27E00D1F04B /* CoreData */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -254,6 +273,35 @@
 				E8FB0B57C570E09D9D4ADC5D /* Pods_Food_Truck_TrackRTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B68C36C5240ED27E00D1F04B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B68C36C2240ED27800D1F04B /* FoodTruck.xcdatamodeld */,
+				B68C36C6240ED29300D1F04B /* CoreDataStack.swift */,
+				B68C36C8240ED48600D1F04B /* JSONTruck.swift */,
+				B68C36CA240ED4A500D1F04B /* JSONMenuItem.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		B68C36CE240ED4FB00D1F04B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B68C36CC240ED4DD00D1F04B /* NetworkingServices.swift */,
+				B68C36CF240ED53C00D1F04B /* Bearer.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		B68C36D3240ED59400D1F04B /* Representation + Ext */ = {
+			isa = PBXGroup;
+			children = (
+				B68C36D1240ED58F00D1F04B /* Truck + Ext.swift */,
+				B68C36D4240ED5E700D1F04B /* MenuItem + Ext.swift */,
+			);
+			path = "Representation + Ext";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,15 +481,23 @@
 				6D4F925A240E4C950095DE2F /* TrucksAroundViewController.swift in Sources */,
 				6D4F925D240E50630095DE2F /* MyTruckCell.swift in Sources */,
 				4CA5838D240C90AA004B0E8F /* AppDelegate.swift in Sources */,
+				B68C36D2240ED58F00D1F04B /* Truck + Ext.swift in Sources */,
 				6D4F925F240E525B0095DE2F /* TruckMenuViewController.swift in Sources */,
+				B68C36CB240ED4A500D1F04B /* JSONMenuItem.swift in Sources */,
 				6D4F9265240EC2470095DE2F /* Foodie.swift in Sources */,
 				4CA5838F240C90AA004B0E8F /* SceneDelegate.swift in Sources */,
 				6D7F9444240E319E00E57201 /* MyTrucksViewController.swift in Sources */,
+				B68C36CD240ED4DD00D1F04B /* NetworkingServices.swift in Sources */,
 				6D47A0FF240DA88C0085BEFA /* Truck.swift in Sources */,
 				6D91C47D240D8D48000581F0 /* AuthService.swift in Sources */,
+				B68C36D5240ED5E700D1F04B /* MenuItem + Ext.swift in Sources */,
+				B68C36C7240ED29300D1F04B /* CoreDataStack.swift in Sources */,
+				B68C36C9240ED48600D1F04B /* JSONTruck.swift in Sources */,
 				6D4F9263240EBF3A0095DE2F /* CreateTruckViewController.swift in Sources */,
+				B68C36D0240ED53C00D1F04B /* Bearer.swift in Sources */,
 				6D5A8352240E2C08007EFA11 /* Constant.swift in Sources */,
 				6DADD286240D9DA100CA09B3 /* TruckService.swift in Sources */,
+				B68C36C4240ED27800D1F04B /* FoodTruck.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +758,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B68C36C2240ED27800D1F04B /* FoodTruck.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B68C36C3240ED27800D1F04B /* FoodTruck.xcdatamodel */,
+			);
+			currentVersion = B68C36C3240ED27800D1F04B /* FoodTruck.xcdatamodel */;
+			path = FoodTruck.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4CA58381240C90AA004B0E8F /* Project object */;
 }

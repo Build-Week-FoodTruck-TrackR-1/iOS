@@ -37,6 +37,7 @@
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYX-c7-UyZ">
                                         <rect key="frame" x="0.0" y="98.5" width="374" height="210"/>
+                                        <color key="backgroundColor" red="0.96990638969999998" green="0.61320751910000004" blue="0.0357950218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="374" id="pzt-3O-01J"/>
                                             <constraint firstAttribute="height" constant="210" id="yz6-nz-PwV"/>
@@ -48,6 +49,7 @@
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWT-P9-i7h">
                                         <rect key="frame" x="0.0" y="350.5" width="374" height="210"/>
+                                        <color key="backgroundColor" red="0.55634254220000001" green="0.97934550050000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="210" id="8OC-s0-p8r"/>
                                             <constraint firstAttribute="width" constant="374" id="Ldv-na-Wcs"/>

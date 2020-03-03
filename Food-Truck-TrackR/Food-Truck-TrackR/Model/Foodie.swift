@@ -8,7 +8,21 @@
 
 import Foundation
 
-struct Foodie {
-    let username: String?
-    let password: String?
+struct Foodie: Codable {
+    var username: String
+    var password: String
+    var email: String
+    
+    init(email: String, password: String) {
+        self.username = email
+        self.password = password
+        self.email = email
+    }
 }
+struct UserLogin: Codable {
+    var username: String
+    var password: String
+}
+
+
+

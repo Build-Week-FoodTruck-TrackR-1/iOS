@@ -8,6 +8,3 @@
 
 import Foundation
 
-struct Truck {
-    
-}
