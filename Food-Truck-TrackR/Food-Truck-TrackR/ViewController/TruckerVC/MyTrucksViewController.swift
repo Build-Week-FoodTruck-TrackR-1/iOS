@@ -1,26 +1,25 @@
 //
-//  LoginViewController.swift
+//  MyTrucksViewController.swift
 //  Food-Truck-TrackR
 //
-//  Created by Kerby Jean on 3/2/20.
+//  Created by Kerby Jean on 3/3/20.
 //  Copyright © 2020 Michael. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+class MyTrucksViewController: UIViewController {
     
+    // This returns the id of the viewController
+    static var id: String {
+        String(describing: self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        // Do any additional setup after loading the view.
     }
-    
-    
-    
     
 
     /*

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vl1-oY-bZA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="U1I-Er-7Ho">
             <objects>
-                <viewController id="Ndf-Pa-T6l" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" id="Ndf-Pa-T6l" customClass="WelcomeViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N99-nf-mJC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,14 +42,20 @@
                                             <constraint firstAttribute="height" constant="210" id="yz6-nz-PwV"/>
                                         </constraints>
                                         <state key="normal" title="Trucker"/>
+                                        <connections>
+                                            <action selector="ChoiceTapped:" destination="Ndf-Pa-T6l" eventType="touchUpInside" id="PMz-kL-iZu"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWT-P9-i7h">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWT-P9-i7h">
                                         <rect key="frame" x="0.0" y="350.5" width="374" height="210"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="210" id="8OC-s0-p8r"/>
                                             <constraint firstAttribute="width" constant="374" id="Ldv-na-Wcs"/>
                                         </constraints>
                                         <state key="normal" title="Foodie"/>
+                                        <connections>
+                                            <action selector="ChoiceTapped:" destination="Ndf-Pa-T6l" eventType="touchUpInside" id="rQB-S3-pzJ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -71,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="0.0" y="98"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Auth View Controller-->
         <scene sceneID="MfH-RA-1R7">
             <objects>
-                <viewController id="AGx-GD-Z66" customClass="LoginViewController" customModule="Food_Truck_TrackR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" id="AGx-GD-Z66" customClass="AuthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SOz-uH-tJN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,6 +94,9 @@
                                             <segment title="Register"/>
                                             <segment title="Log In"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="ChoiceValueChanged:" destination="AGx-GD-Z66" eventType="valueChanged" id="uGq-bl-4tP"/>
+                                        </connections>
                                     </segmentedControl>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yba-cd-swy">
                                         <rect key="frame" x="0.0" y="49" width="374" height="34"/>
@@ -112,6 +121,9 @@
                                             <constraint firstAttribute="width" constant="374" id="M0r-te-HpT"/>
                                         </constraints>
                                         <state key="normal" title="Register"/>
+                                        <connections>
+                                            <action selector="authButtonTapped:" destination="AGx-GD-Z66" eventType="touchUpInside" id="5uZ-Y7-m1M"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -125,6 +137,12 @@
                         <viewLayoutGuide key="safeArea" id="qfz-OD-RYC"/>
                     </view>
                     <navigationItem key="navigationItem" id="77S-nr-EZC"/>
+                    <connections>
+                        <outlet property="authButton" destination="ZTx-so-hCO" id="bNt-hc-5Ft"/>
+                        <outlet property="passwordField" destination="6Lh-kB-gI8" id="gqW-zt-OVk"/>
+                        <outlet property="segmentedControl" destination="9qA-7n-vHx" id="zw7-IG-dzO"/>
+                        <outlet property="usernameField" destination="yba-cd-swy" id="LDz-5l-bNX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0K-FO-Uy3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
