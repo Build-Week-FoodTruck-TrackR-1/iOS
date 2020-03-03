@@ -17,6 +17,9 @@
 		6D47A0FF240DA88C0085BEFA /* Truck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47A0FE240DA88C0085BEFA /* Truck.swift */; };
 		6D47A101240DA8A20085BEFA /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D47A100240DA8A20085BEFA /* Users.swift */; };
 		6D5A8346240DB99D007EFA11 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5A8345240DB99C007EFA11 /* LoginViewController.swift */; };
+		6D5A8348240E1FCC007EFA11 /* New.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A8347240E1FCC007EFA11 /* New.storyboard */; };
+		6D5A834A240E2297007EFA11 /* Trucker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A8349240E2297007EFA11 /* Trucker.storyboard */; };
+		6D5A834C240E22A1007EFA11 /* Foodie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5A834B240E22A1007EFA11 /* Foodie.storyboard */; };
 		6D91C47A240D8D07000581F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D91C479240D8D07000581F0 /* GoogleService-Info.plist */; };
 		6D91C47D240D8D48000581F0 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91C47C240D8D48000581F0 /* Auth.swift */; };
 		6DAB0F15240DA57E00BA6286 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DAB0F14240DA57E00BA6286 /* Main.storyboard */; };
@@ -49,6 +52,9 @@
 		6D47A0FE240DA88C0085BEFA /* Truck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Truck.swift; sourceTree = "<group>"; };
 		6D47A100240DA8A20085BEFA /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		6D5A8345240DB99C007EFA11 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6D5A8347240E1FCC007EFA11 /* New.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = New.storyboard; sourceTree = "<group>"; };
+		6D5A8349240E2297007EFA11 /* Trucker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Trucker.storyboard; sourceTree = "<group>"; };
+		6D5A834B240E22A1007EFA11 /* Foodie.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Foodie.storyboard; sourceTree = "<group>"; };
 		6D91C479240D8D07000581F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6D91C47C240D8D48000581F0 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		6DAB0F14240DA57E00BA6286 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -127,6 +133,9 @@
 			children = (
 				4CA58397240C90AA004B0E8F /* LaunchScreen.storyboard */,
 				6DAB0F14240DA57E00BA6286 /* Main.storyboard */,
+				6D5A8347240E1FCC007EFA11 /* New.storyboard */,
+				6D5A8349240E2297007EFA11 /* Trucker.storyboard */,
+				6D5A834B240E22A1007EFA11 /* Foodie.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -270,6 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D5A8348240E1FCC007EFA11 /* New.storyboard in Resources */,
+				6D5A834A240E2297007EFA11 /* Trucker.storyboard in Resources */,
+				6D5A834C240E22A1007EFA11 /* Foodie.storyboard in Resources */,
 				4CA58399240C90AA004B0E8F /* LaunchScreen.storyboard in Resources */,
 				6D91C47A240D8D07000581F0 /* GoogleService-Info.plist in Resources */,
 				4CA58396240C90AA004B0E8F /* Assets.xcassets in Resources */,
