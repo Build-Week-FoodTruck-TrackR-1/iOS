@@ -1,14 +1,13 @@
 //
-//  Bearer.swift
+//  Login.swift
 //  Food-Truck-TrackR
 //
-//  Created by Nick Nguyen on 3/3/20.
+//  Created by Michael on 3/3/20.
 //  Copyright © 2020 Michael. All rights reserved.
 //
 
 import Foundation
 
-struct Bearer: Codable {
-    var token: String
+struct Login: Codable {
     var id: Int
 }

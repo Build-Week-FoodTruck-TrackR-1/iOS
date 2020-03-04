@@ -23,6 +23,8 @@ class APIServices {
     
     private var bearer: Bearer?
     
+    private var login: Login?
+    
     var isUserLoggedIn: Bool {
         if bearer == nil {
             return false
@@ -30,6 +32,8 @@ class APIServices {
             return true
         }
     }
+    
+    var trucksByOperator: [TruckRepresentation] = []
     
     func operatorSignUp(truckOperator: Foodie, completion: @escaping (Error?) -> Void) {
         let registerOperatorURL = baseURL.appendingPathComponent("auth/register/operators")
@@ -104,9 +108,9 @@ class APIServices {
                 }
                 return
             }
-            
             do {
-                self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                let decoder = JSONDecoder()
+                self.bearer = try decoder.decode(Bearer.self, from: data)
             } catch {
                 NSLog("Error Decoding Bearer Object for Truck Operator: \(error)")
                 DispatchQueue.main.async {
@@ -135,7 +139,7 @@ class APIServices {
             completion(error)
             return
         }
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let response = response as? HTTPURLResponse, response.statusCode != 201 {
                 NSLog("HTTP URL Diner Registration Response: \(response)")
                 DispatchQueue.main.async {
@@ -205,6 +209,154 @@ class APIServices {
             DispatchQueue.main.async {
                 completion(nil)
             }
+        }.resume()
+    }
+    
+    func fetchAllTrucksByOperator(completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        
+        
+        let trucksForOperatorURL = baseURL.appendingPathComponent("operator/\(bearer.id)/trucks")
+        var request = URLRequest(url: trucksForOperatorURL)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL GET Request Response for Operators Trucks: \(response)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let error = error {
+                NSLog("Error Fetching Operators Trucks: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            guard let data = data else {
+                NSLog("Bad Data Returned By Data Task")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            do {
+                let truckRepArray = try JSONDecoder().decode([TruckRepresentation].self, from: data)
+                self.trucksByOperator = truckRepArray
+            } catch {
+                NSLog("Error Decoding Truck Representation Objects: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func addTruckToOperator(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        
+        let addTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/trucks")
+        var request = URLRequest(url: addTruckURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let jsonTruckRep = try JSONEncoder().encode(truck)
+            request.httpBody = jsonTruckRep
+        } catch {
+            NSLog("Error Encoding Truck Representation to JSON for Add: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error POST'n Truck To Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL Response Status Code was Not 200. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func editExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        
+        let editExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.id)")
+        var request = URLRequest(url: editExistingTruckURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let jsonTruckRep = try JSONEncoder().encode(truck)
+            request.httpBody = jsonTruckRep
+        } catch {
+            NSLog("Error Encoding Truck Representation Object to JSON for Edit: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error PUT'n Truck to Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL Response Code was not 200. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func deleteExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        
+        let deleteExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.id)")
+        var request = URLRequest(url: deleteExistingTruckURL)
+        request.httpMethod = HTTPMethod.delete.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error DELETE'n Truck from Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL Response Code was not 200. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
         }.resume()
     }
 }
