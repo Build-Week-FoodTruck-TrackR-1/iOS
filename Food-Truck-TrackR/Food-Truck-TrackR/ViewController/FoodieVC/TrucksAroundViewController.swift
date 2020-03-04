@@ -35,6 +35,10 @@ class TrucksAroundViewController: UIViewController {
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
         
         trucks = [TruckRepresentation(id: 1, name: "Food truck", image: "", cuisineType: "")]
+        
+        let address = "15520 SW 127th Ave, Miami, FL 33177"
+        
+        print(address.getCoordinate())
 
         locationController.addAnnotations(trucks: trucks)
     }

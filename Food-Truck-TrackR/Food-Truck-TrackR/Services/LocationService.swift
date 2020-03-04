@@ -39,6 +39,13 @@ class LocationController: NSObject {
     func addAnnotations(trucks: [TruckRepresentation]) {
 
         let mapItems = trucks.compactMap { (truck) -> MKMapItem? in
+            getCoordinate(address: "") { (result) in
+                if let coordinate = try? result.get() {
+                    print(coordinate)
+                }
+            }
+            
+            
             let coordinate = CLLocationCoordinate2D(latitude: 25.919600, longitude: -80.212550)
             let placemark = MKPlacemark(coordinate: coordinate)
             let mapItem = MKMapItem(placemark: placemark)
