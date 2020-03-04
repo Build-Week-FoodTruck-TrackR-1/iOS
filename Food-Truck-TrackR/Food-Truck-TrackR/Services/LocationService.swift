@@ -36,7 +36,7 @@ class LocationController: NSObject {
     }
     
     // Add annotations
-    func addAnnotations(trucks: [Truck]) {
+    func addAnnotations(trucks: [TruckRepresentation]) {
 
         let mapItems = trucks.compactMap { (truck) -> MKMapItem? in
             let coordinate = CLLocationCoordinate2D(latitude: 25.919600, longitude: -80.212550)
