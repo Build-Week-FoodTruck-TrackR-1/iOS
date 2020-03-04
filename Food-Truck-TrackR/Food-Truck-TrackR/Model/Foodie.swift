@@ -19,6 +19,7 @@ struct Foodie: Codable {
         self.email = email
     }
 }
+
 struct UserLogin: Codable {
     var username: String
     var password: String

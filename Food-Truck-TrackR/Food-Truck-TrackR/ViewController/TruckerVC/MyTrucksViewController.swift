@@ -16,7 +16,15 @@ class MyTrucksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let api = APIServices()
+        let newTruck = TruckRepresentation(name: "Merp Merp", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuEwzXecCmw7cNrVlsVq1wKv1m6zg_X-LBvXmqoeRLtw3bIJo9", cuisineType: "Mexican-Chinese Fusion")
+            
+        api.addTruckToOperator(truck: newTruck) { _ in
+            print("\(api.trucksByOperator[0].name)")
+        }
+        
+        
     }
 }
 

@@ -23,8 +23,6 @@ class APIServices {
     
     private var bearer: Bearer?
     
-    private var login: Login?
-    
     var isUserLoggedIn: Bool {
         if bearer == nil {
             return false
@@ -276,7 +274,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 NSLog("Error POST'n Truck To Server: \(error)")
                 DispatchQueue.main.async {
@@ -284,8 +282,25 @@ class APIServices {
                 }
                 return
             }
-            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
-                NSLog("HTTP URL Response Status Code was Not 200. Response: \(response.statusCode)")
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
+                NSLog("HTTP URL Response Status Code was Not 201. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            guard let data = data else {
+                NSLog("Bad Data Returned by Data Task")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            do {
+                let newTruckRep = try JSONDecoder().decode(TruckRepresentation.self, from: data)
+                self.trucksByOperator.append(newTruckRep)
+            } catch {
+                NSLog("Error Decoding Truck Representation Object: \(error)")
                 DispatchQueue.main.async {
                     completion(error)
                 }
@@ -296,9 +311,11 @@ class APIServices {
     }
     
     func editExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer else { return }
+        guard let bearer = bearer, let truckID = truck.id else { return }
         
-        let editExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.id)")
+        trucksByOperator.insert(truck, at: 0)
+        
+        let editExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)")
         var request = URLRequest(url: editExistingTruckURL)
         request.httpMethod = HTTPMethod.put.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -315,7 +332,7 @@ class APIServices {
         
         URLSession.shared.dataTask(with: request) { _, response, error in
             if let error = error {
-                NSLog("Error PUT'n Truck to Server: \(error)")
+                NSLog("Error PUT'n Edited Truck to Server: \(error)")
                 DispatchQueue.main.async {
                     completion(error)
                 }
@@ -333,9 +350,9 @@ class APIServices {
     }
     
     func deleteExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer else { return }
+        guard let bearer = bearer, let truckID = truck.id else { return }
         
-        let deleteExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.id)")
+        let deleteExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)")
         var request = URLRequest(url: deleteExistingTruckURL)
         request.httpMethod = HTTPMethod.delete.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -358,5 +375,111 @@ class APIServices {
             }
             completion(nil)
         }.resume()
+    }
+    
+    func addMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer, let truckID = truck.id else { return }
+        
+        let addItemToTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/items")
+        var request = URLRequest(url: addItemToTruckURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let jsonMenuItem = try JSONEncoder().encode(menuItem)
+            request.httpBody = jsonMenuItem
+        } catch {
+            NSLog("Error Encoding Menu Item Representation to JSON for Add: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error POST'n Menu Item to Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 201 {
+                NSLog("HTTP URL Response Code was not 201. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func editMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer, let truckID = truck.id, let itemID = menuItem.id else { return }
+        
+        let editMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/item/\(itemID)")
+        var request = URLRequest(url: editMenuItemURL)
+        request.httpMethod = HTTPMethod.put.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let jsonEditedItem = try JSONEncoder().encode(menuItem)
+            request.httpBody = jsonEditedItem
+        } catch {
+            NSLog("Error Encoding Menu Item Representation to JSON for Edit: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error PUT'n Edited Menu Item to Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL Response Code was not 200. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func deleteMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer, let truckID = truck.id, let itemID = menuItem.id else { return }
+        
+        let deleteMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/item/\(itemID)")
+        var request = URLRequest(url: deleteMenuItemURL)
+        request.httpMethod = HTTPMethod.delete.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                NSLog("Error DELETE'n Menu Item from Server: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                NSLog("HTTP URL Response Code was not 200. Response: \(response.statusCode)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    func fetchMenuForTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
+        
     }
 }

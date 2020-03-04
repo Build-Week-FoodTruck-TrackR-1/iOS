@@ -9,9 +9,16 @@
 import Foundation
 
 struct TruckRepresentation: Codable {
-    var id: Int
+    var id: Int? = nil
     var name: String
     var image: String
     var cuisineType: String
+    
+    enum TruckKeys: String, CodingKey {
+        case id
+        case name
+        case image
+        case cuisingType = "cuising_type"
+    }
 }
 
