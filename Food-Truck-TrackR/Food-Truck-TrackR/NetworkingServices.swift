@@ -481,5 +481,6 @@ class APIServices {
     
     func fetchMenuForTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
         let x = 1
+        let y = 2 
     }
 }
