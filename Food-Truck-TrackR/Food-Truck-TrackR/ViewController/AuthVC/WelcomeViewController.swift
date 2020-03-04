@@ -10,6 +10,7 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    let apiServices = APIServices()
     
     // MARK: - Functions
     

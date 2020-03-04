@@ -7,70 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3C15EBB0-12F6-4364-B8CB-6F5790B67B8A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Food-Truck-TrackR/ViewController/TruckerVC/MyTrucksViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3C15EBB0-12F6-4364-B8CB-6F5790B67B8A - ad4e742e2d1be6b0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Food_Truck_TrackR.MyTrucksViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Food-Truck-TrackR"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michael/Documents/Development/test/iOS/Food-Truck-TrackR/Food-Truck-TrackR/ViewController/TruckerVC/MyTrucksViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "376">
-               </Location>
-               <Location
-                  uuid = "3C15EBB0-12F6-4364-B8CB-6F5790B67B8A - 70313876fec810aa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Food_Truck_TrackR.MyTrucksViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "Food-Truck-TrackR"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/michael/Documents/Development/test/iOS/Food-Truck-TrackR/Food-Truck-TrackR/ViewController/TruckerVC/MyTrucksViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C05E1CCE-FBFC-45E9-B8C7-37DC34B57556"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Food-Truck-TrackR/ViewController/TruckerVC/MyTrucksViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E8730915-7FB9-4A09-B214-51AC0F4FE556"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -78,8 +14,8 @@
             filePath = "Food-Truck-TrackR/NetworkingServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "addTruckToOperator(truck:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +30,8 @@
             filePath = "Food-Truck-TrackR/NetworkingServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "addTruckToOperator(truck:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +46,8 @@
             filePath = "Food-Truck-TrackR/NetworkingServices.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "addTruckToOperator(truck:completion:)"
             landmarkType = "7">
             <Locations>
@@ -126,9 +62,9 @@
                   urlString = "file:///Users/michael/Documents/Development/test/iOS/Food-Truck-TrackR/Food-Truck-TrackR/NetworkingServices.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "310"
-                  endingLineNumber = "310"
-                  offsetFromSymbolStart = "2578">
+                  startingLineNumber = "312"
+                  endingLineNumber = "312"
+                  offsetFromSymbolStart = "2381">
                </Location>
                <Location
                   uuid = "35838367-4AE5-4261-A3B4-9D6C204DDC32 - fe0f6478e280dfc5"
@@ -141,11 +77,27 @@
                   urlString = "file:///Users/michael/Documents/Development/test/iOS/Food-Truck-TrackR/Food-Truck-TrackR/NetworkingServices.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "310"
-                  endingLineNumber = "310"
-                  offsetFromSymbolStart = "3861">
+                  startingLineNumber = "312"
+                  endingLineNumber = "312"
+                  offsetFromSymbolStart = "4606">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E414977-EA4A-47B1-9690-7816BD2C183E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Food-Truck-TrackR/NetworkingServices.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "addTruckToOperator(truck:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

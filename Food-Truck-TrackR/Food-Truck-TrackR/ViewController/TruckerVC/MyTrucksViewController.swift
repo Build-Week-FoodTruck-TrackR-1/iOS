@@ -12,18 +12,27 @@ class MyTrucksViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var apiServices: APIServices? {
+        didSet {
+            let newTruck = TruckRepresentation(name: "I sell Food", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuEwzXecCmw7cNrVlsVq1wKv1m6zg_X-LBvXmqoeRLtw3bIJo9", cuisineType: "Mexican", physicalAddress: "555 fake st. Oakland, CA 55555")
+            apiServices?.addTruckToOperator(truck: newTruck) { _ in
+                
+            }
+        }
+    }
+    
     var trucks = [Truck]()
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        let newTruck = TruckRepresentation(name: "I sell Food", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuEwzXecCmw7cNrVlsVq1wKv1m6zg_X-LBvXmqoeRLtw3bIJo9", cuisineType: "Mexican", physicalAddress: "555 fake st. Oakland, CA 55555")
+//        apiServices?.addTruckToOperator(truck: newTruck) { _ in
+//            print("\(String(describing: self.apiServices?.trucksByOperator[0].name))")
+//        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let api = APIServices()
-        let newTruck = TruckRepresentation(name: "Merp Merp", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuEwzXecCmw7cNrVlsVq1wKv1m6zg_X-LBvXmqoeRLtw3bIJo9", cuisineType: "Mexican-Chinese Fusion")
-            
-        api.addTruckToOperator(truck: newTruck) { _ in
-            print("\(api.trucksByOperator[0].name)")
-        }
-        
         
     }
 }
