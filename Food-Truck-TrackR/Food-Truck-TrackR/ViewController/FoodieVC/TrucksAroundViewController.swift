@@ -34,7 +34,7 @@ class TrucksAroundViewController: UIViewController {
         // Make sure `MKPinAnnotationView` and the reuse identifier is recognized in this map view.
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
         
-        trucks = [TruckRepresentation(id: 1, name: "Food truck", image: "", cuisineType: "")]
+        trucks = [TruckRepresentation(id: 1, name: "Food truck", image: "", cuisineType: "", physicalAddress: "")]
 
         locationController.addAnnotations(trucks: trucks)
     }

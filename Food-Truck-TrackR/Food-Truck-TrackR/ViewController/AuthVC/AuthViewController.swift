@@ -105,7 +105,8 @@ class AuthViewController: UIViewController {
             if choice == .trucker {
                 let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: nil)
                 let nav = storyboard.instantiateViewController(withIdentifier: "TruckerNav") as! UINavigationController
-                let _ = nav.topViewController as! MyTrucksViewController
+                let myTruckVC = nav.topViewController as! MyTrucksViewController
+                myTruckVC.apiServices = apiServices
                 nav.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(nav, animated: true, completion: nil)
             } else {
@@ -116,7 +117,6 @@ class AuthViewController: UIViewController {
                 self.navigationController?.present(nav, animated: true, completion: nil)
             }
         }
-    
     
     let apiServices = APIServices()
 }

@@ -13,12 +13,14 @@ struct TruckRepresentation: Codable {
     var name: String
     var image: String
     var cuisineType: String
+    var physicalAddress: String
     
     enum TruckKeys: String, CodingKey {
         case id
         case name
         case image
         case cuisingType = "cuising_type"
+        case physicalAddress = "physical_address"
     }
 }
 

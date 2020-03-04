@@ -21,7 +21,7 @@ class APIServices {
     
     private let baseURL = URL(string: "https://foodtrucktrackr.herokuapp.com/api/")!
     
-    private var bearer: Bearer?
+    var bearer: Bearer?
     
     var isUserLoggedIn: Bool {
         if bearer == nil {
@@ -297,6 +297,8 @@ class APIServices {
                 return
             }
             do {
+                let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+                print(jsonData)
                 let newTruckRep = try JSONDecoder().decode(TruckRepresentation.self, from: data)
                 self.trucksByOperator.append(newTruckRep)
             } catch {
@@ -477,11 +479,5 @@ class APIServices {
             }
             completion(nil)
         }.resume()
-    }
-    
-    func fetchMenuForTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
-        let x = 1
-        let y = 2
-        let z = 3
     }
 }
