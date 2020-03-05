@@ -14,15 +14,6 @@ class MyTrucksViewController: UIViewController {
     
     var apiServices: APIServices? {
         didSet {
-            
-<<<<<<< HEAD
-            print("DID SET")
-            let newTruck = TruckRepresentation(name: "I sell Food", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSuEwzXecCmw7cNrVlsVq1wKv1m6zg_X-LBvXmqoeRLtw3bIJo9", cuisineType: "Mexican", physicalAddress: "555 fake st. Oakland, CA 55555")
-            apiServices?.addTruckToOperator(truck: newTruck) { _ in
-                
-            }
-=======
->>>>>>> 13499e6b4f912cb6c7a714e6b7f6d3dc61b06b34
         }
     }
     
