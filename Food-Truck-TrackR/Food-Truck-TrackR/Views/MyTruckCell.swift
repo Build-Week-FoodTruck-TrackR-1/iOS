@@ -10,10 +10,16 @@ import UIKit
 
 class MyTruckCell: UITableViewCell {
 
-    @IBOutlet weak var truckImageView: UIImageView!
+    
+    //MARK:- IBOutlets
+    
+    @IBOutlet weak var truckImageView: UIImageView! 
+      
+    
     @IBOutlet weak var cuisineTypeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var truckNameLabel: UILabel!
     
     static var id: String {
         return String(describing: self)
@@ -26,6 +32,19 @@ class MyTruckCell: UITableViewCell {
     }
     
     private func updateViews() {
-    
+        
+     print("update view for the cell ")
+        
+        if let truck = truck {
+            guard let name = truck.name,
+                let location = truck.physicalLocation,
+                let cuisineType = truck.cuisineType,
+                let dataImage = truck.imageOfTruck else { return }
+            
+            truckNameLabel.text = "Name: \(name)"
+            locationLabel.text = "Location:\(location)"
+            cuisineTypeLabel.text = "Cuisine Type: \( cuisineType)"
+            truckImageView.image = UIImage(data: dataImage)
+        }
     }
 }

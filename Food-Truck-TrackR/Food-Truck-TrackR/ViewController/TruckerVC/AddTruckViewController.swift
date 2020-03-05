@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 class AddTruckViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
    
@@ -15,24 +15,70 @@ class AddTruckViewController: UIViewController, UINavigationControllerDelegate, 
    
   //MARK: - IBOutlets
   weak var delegate : AddTruckViewControllerDelegate?
+    
   @IBOutlet weak var truckLocation: UITextField!
   @IBOutlet weak var cuisineType: UITextField!
-  @IBOutlet weak var truckImageView: UIImageView! {
-    didSet {
-      truckImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+    @IBOutlet weak var truckImageView: UIImageView! {
+        didSet {
+            truckImageView.isUserInteractionEnabled =  true
+               truckImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+        }
     }
-  }
-   
+
+    
+    
   @IBOutlet weak var truckNamTextField: UITextField! {
     didSet {
       truckNamTextField.becomeFirstResponder()
+        
     }
   }
    
+    
    
   @IBAction func saveTruckTapped(_ sender: UIBarButtonItem) {
   // Call delegate here.
-     
+    if let truck = truck {
+        delegate?.didAddTruck(truck: truck)
+              print("Attemping to edit truck")
+        
+        truck.name = truckNamTextField.text
+        truck.imageOfTruck = truckImageView.image?.pngData()
+        truck.cuisineType = cuisineType.text
+        truck.physicalLocation = truckLocation.text
+        navigationController?.popViewController(animated: true)
+      
+        do {
+            try CoreDataStack.shared.mainContext.save()
+        } catch let err as NSError {
+            print(err.localizedDescription)
+        }
+        
+    } else {
+        guard let address = truckLocation.text,
+                  let name = truckNamTextField.text,
+                  let cuisinseType = cuisineType.text,
+                  let  imageData = truckImageView.image?.jpegData(compressionQuality: 1.0) else { return }
+              
+              let _ = Truck(physicalLocation:address,
+                                name:name,
+                                longitude: 0,
+                                latitude: 0,
+                                imageOfTruck:imageData,
+                                customerRatings: [Int64(3)],
+                                customerRatingAvg: Int64(3),
+                                cusinseType: cuisinseType )
+
+              do  {
+                 try CoreDataStack.shared.mainContext.save()
+              } catch let error as NSError {
+                NSLog("Error creating new Truck", error)
+              }
+              navigationController?.popViewController(animated: true)
+
+    }
+   
+
   }
    
   
@@ -41,8 +87,24 @@ class AddTruckViewController: UIViewController, UINavigationControllerDelegate, 
    
   override func viewDidLoad() {
     super.viewDidLoad()
-     
+
+  
   }
+    
+    
+      override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
+        
+          if let truck = truck {
+              title = "Edit truck"
+              truckNamTextField.text = truck.name
+              truckLocation.text = truck.physicalLocation!
+              cuisineType.text = truck.cuisineType
+              truckImageView.image = UIImage(data: truck.imageOfTruck!)
+          }
+        
+      }
+      
    
   //MARK: - Methods:
    

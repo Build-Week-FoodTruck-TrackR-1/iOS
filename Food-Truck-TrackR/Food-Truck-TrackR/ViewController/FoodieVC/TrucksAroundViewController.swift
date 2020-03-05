@@ -33,7 +33,7 @@ class TrucksAroundViewController: UIViewController {
         mapView.delegate = self
         // Make sure `MKPinAnnotationView` and the reuse identifier is recognized in this map view.
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
-        trucks = [Truck(physicalLocation: "14212 NE 3RD CT", name: "Food truck", longitude: Int64(-80.212550), latitude: Int64(25.919600), imageOfTruck: URL(string: "test")!, customerRatings: [5], customerRatingAvg: 17, cusinseType: "")]
+//        trucks = [Truck(physicalLocation: "14212 NE 3RD CT", name: "Food truck", longitude: Int64(-80.212550), latitude: Int64(25.919600), imageOfTruck: URL(string: "test")!, customerRatings: [5], customerRatingAvg: 17, cusinseType: "")]
         locationController.addAnnotations(trucks: trucks)
     }
 }

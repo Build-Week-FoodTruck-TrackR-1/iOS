@@ -12,7 +12,7 @@ import Foundation
 struct JSONMenuItem : Codable  {
     
     let itemPrice: Double?
-    let itemPhotos : [URL] // array of images
+    let itemPhotos : [Data] // array of images
     let itemName: String?
     let itemDescription: String?
     let customerRatings: [Int64]

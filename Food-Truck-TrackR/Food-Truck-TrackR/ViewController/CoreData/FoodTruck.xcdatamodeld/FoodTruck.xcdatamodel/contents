@@ -2,23 +2,23 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D49f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="MenuItem" representedClassName="MenuItem" syncable="YES" codeGenerationType="class">
         <attribute name="customerRatingAvg" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="customerRatings" optional="YES" attributeType="Transformable"/>
+        <attribute name="customerRatings" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="itemDescription" optional="YES" attributeType="String"/>
         <attribute name="itemName" optional="YES" attributeType="String"/>
-        <attribute name="itemPhotos" optional="YES" attributeType="Transformable"/>
+        <attribute name="itemPhotos" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="itemPrice" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="truck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Truck" inverseName="menuItems" inverseEntity="Truck"/>
     </entity>
     <entity name="Truck" representedClassName="Truck" syncable="YES" codeGenerationType="class">
         <attribute name="cuisineType" optional="YES" attributeType="String"/>
-        <attribute name="customerRatingAvg" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="customerRatings" optional="YES" attributeType="Transformable"/>
+        <attribute name="customerRatingAvg" optional="YES" attributeType="Integer 64" defaultValueString="3" usesScalarValueType="YES"/>
+        <attribute name="customerRatings" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
         <attribute name="identifier" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="imageOfTruck" optional="YES" attributeType="URI"/>
-        <attribute name="latitude" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageOfTruck" optional="YES" attributeType="Binary"/>
+        <attribute name="latitude" optional="YES" attributeType="Integer 64" defaultValueString="3" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Integer 64" defaultValueString="3" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="physicalLocation" optional="YES" attributeType="String"/>
+        <attribute name="physicalLocation" optional="YES" attributeType="String" defaultValueString=""/>
         <relationship name="menuItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MenuItem" inverseName="truck" inverseEntity="MenuItem"/>
     </entity>
     <elements>

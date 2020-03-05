@@ -13,7 +13,7 @@ extension MenuItem {
     
     
     var jsonMenuItem: JSONMenuItem? {
-        guard let itemPhotos = itemPhotos as? [URL], let customerRatings = customerRatings as? [Int64] else { return nil }
+        guard let itemPhotos = itemPhotos as? [Data], let customerRatings = customerRatings as? [Int64] else { return nil }
     
         return JSONMenuItem(itemPrice: itemPrice,
                             itemPhotos:itemPhotos,
@@ -28,7 +28,7 @@ extension MenuItem {
     
     
      // This creates a new managed object from raw data
-    @discardableResult convenience init(itemPrice: Double, itemPhotos: [URL], itemName: String, itemDescription: String,customerRatings: [Int64], customerRatingAvg: Int64, context: NSManagedObjectContext = CoreDataStack.shared.mainContext ) {
+    @discardableResult convenience init(itemPrice: Double, itemPhotos: [Data], itemName: String, itemDescription: String,customerRatings: [Int64], customerRatingAvg: Int64, context: NSManagedObjectContext = CoreDataStack.shared.mainContext ) {
         
         self.init(context:context)
         self.itemPrice = itemPrice

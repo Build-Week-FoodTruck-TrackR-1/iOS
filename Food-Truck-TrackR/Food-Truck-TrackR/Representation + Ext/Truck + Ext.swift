@@ -37,7 +37,7 @@ extension Truck {
         name: String ,
         longitude :Int64,
         latitude: Int64,
-        imageOfTruck: URL,
+        imageOfTruck: Data,
         customerRatings: [Int64],
         customerRatingAvg: Int64,
         cusinseType: String,

@@ -11,10 +11,12 @@ import UIKit
 class AddMenuViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
    
   //MARK: - IBOutlets
-   
+    var truck : Truck?
+    var menuItem: MenuItem?
   @IBOutlet weak var menuImageView: UIImageView! {
     
     didSet {
+        menuImageView.isUserInteractionEnabled = true 
       menuImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
     }
   }
@@ -28,10 +30,30 @@ class AddMenuViewController: UIViewController, UINavigationControllerDelegate, U
   }
    
    
-   
-   
+    @IBOutlet weak var menuPriceTextField: UITextField!
+    
+  
   @IBAction func saveTapped(_ sender: UIBarButtonItem) {
     // Call delegate
+    guard let itemPrice = menuPriceTextField.text ,
+        let itemPhoto = menuImageView.image?.pngData() ,
+        let itemName = menuName.text else { return }
+    guard let price = Double(itemPrice) else { return }
+   
+   let newMenu  = MenuItem(itemPrice: price ,
+                 itemPhotos: [itemPhoto],
+                 itemName: itemName,
+                 itemDescription: menuDescription.text,
+                 customerRatings: [2],
+                 customerRatingAvg: 2)
+    
+    do {
+       try CoreDataStack.shared.mainContext.save()
+    } catch let err as NSError {
+        print(err)
+    }
+    navigationController?.popViewController(animated: true)
+    print("Saving menu...")
   }
    
    

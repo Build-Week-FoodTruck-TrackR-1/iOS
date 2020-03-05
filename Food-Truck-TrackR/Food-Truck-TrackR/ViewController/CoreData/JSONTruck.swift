@@ -14,7 +14,7 @@ struct JSONTruck : Codable {
     let name: String?
     let longitude : Int64?
     let latitude : Int64?
-    let imageOfTruck: URL?
+    let imageOfTruck: Data?
     let customerRatings : [Int64]
     let customerRatingAvg : Int64
     let cusinseType: String?
