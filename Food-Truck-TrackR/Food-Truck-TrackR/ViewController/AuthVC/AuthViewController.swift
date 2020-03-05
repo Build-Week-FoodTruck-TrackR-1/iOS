@@ -64,13 +64,24 @@ class AuthViewController: UIViewController {
                                 self.present(alertController, animated: true) {
                                     self.authStatus = .logIn
                                     self.segmentedControl.selectedSegmentIndex = 1
-                                    self.authButton.setTitle("Log In", for: .normal)
+                                    self.authButton.setTitle("Login", for: .normal)
                             }
                         }
                     }
                 case .logIn:
                     apiServices.operatorLogin(truckOperator: newUserLogin) { _ in
-                        self.goToStoryboard()
+                        if self.apiServices.isUserLoggedIn {
+                            self.goToStoryboard()
+                        } else {
+                            let alertController = UIAlertController(title: "Login Unsuccessful!", message: "Please Log In...", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                alertController.addAction(alertAction)
+                                self.present(alertController, animated: true) {
+                                    self.authStatus = .logIn
+                                    self.segmentedControl.selectedSegmentIndex = 1
+                                    self.authButton.setTitle("Login", for: .normal)
+                            }
+                        }
                     }
                 }
             }

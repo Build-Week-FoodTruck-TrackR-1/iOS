@@ -21,7 +21,7 @@ class APIServices {
     
     private let baseURL = URL(string: "https://foodtrucktrackr.herokuapp.com/api/")!
     
-    var bearer: Bearer?
+    private var bearer: Bearer?
     
     var isUserLoggedIn: Bool {
         if bearer == nil {
@@ -32,6 +32,8 @@ class APIServices {
     }
     
     var trucksByOperator: [TruckRepresentation] = []
+    
+    var menuItemsByTruck: [MenuItemRepresentation] = []
     
     func operatorSignUp(truckOperator: Foodie, completion: @escaping (Error?) -> Void) {
         let registerOperatorURL = baseURL.appendingPathComponent("auth/register/operators")
@@ -49,7 +51,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let response = response as? HTTPURLResponse, response.statusCode != 201 {
                 NSLog("HTTP URL Truck Operator Registration Response: \(response)")
                 DispatchQueue.main.async {
@@ -86,7 +88,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 NSLog("HTTP URL Truck Operator Login Response: \(response)")
                 DispatchQueue.main.async {
@@ -174,7 +176,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 NSLog("HTTP URL Diner Login Response: \(response)")
                 DispatchQueue.main.async {
@@ -220,7 +222,7 @@ class APIServices {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse, response.statusCode != 200 {
                 NSLog("HTTP URL GET Request Response for Operators Trucks: \(response)")
                 DispatchQueue.main.async {
@@ -243,8 +245,12 @@ class APIServices {
                 return
             }
             do {
-                let truckRepArray = try JSONDecoder().decode([TruckRepresentation].self, from: data)
-                self.trucksByOperator = truckRepArray
+                let truckRep = try JSONDecoder().decode([TruckRepresentation].self, from: data)
+                self.trucksByOperator = truckRep
+                for truck in truckRep {
+                    Truck(truckRepresentation: truck)
+                    self.saveToPersistentStore()
+                }
             } catch {
                 NSLog("Error Decoding Truck Representation Objects: \(error)")
                 DispatchQueue.main.async {
@@ -256,7 +262,7 @@ class APIServices {
         }.resume()
     }
     
-    func addTruckToOperator(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
+    func addTruckToOperator(truck: Truck, completion: @escaping (Error?) -> Void) {
         guard let bearer = bearer else { return }
         
         let addTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/trucks")
@@ -265,8 +271,16 @@ class APIServices {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
+        
+        
         do {
-            let jsonTruckRep = try JSONEncoder().encode(truck)
+            guard let truckRep = truck.truckRepresentation else {
+                completion(NSError())
+                return
+            }
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let jsonTruckRep = try encoder.encode(truckRep)
             request.httpBody = jsonTruckRep
         } catch {
             NSLog("Error Encoding Truck Representation to JSON for Add: \(error)")
@@ -274,7 +288,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 NSLog("Error POST'n Truck To Server: \(error)")
                 DispatchQueue.main.async {
@@ -297,10 +311,14 @@ class APIServices {
                 return
             }
             do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
                 print(jsonData)
-                let newTruckRep = try JSONDecoder().decode(TruckRepresentation.self, from: data)
+                let newTruckRep = try decoder.decode(TruckRepresentation.self, from: data)
                 self.trucksByOperator.append(newTruckRep)
+                Truck(truckRepresentation: newTruckRep)
+                self.saveToPersistentStore()
             } catch {
                 NSLog("Error Decoding Truck Representation Object: \(error)")
                 DispatchQueue.main.async {
@@ -312,19 +330,26 @@ class APIServices {
         }.resume()
     }
     
-    func editExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer, let truckID = truck.id else { return }
+    func editExistingTruck(truck: Truck, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
         
-        trucksByOperator.insert(truck, at: 0)
         
-        let editExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)")
+        
+        let editExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.identifier)")
         var request = URLRequest(url: editExistingTruckURL)
         request.httpMethod = HTTPMethod.put.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
         do {
-            let jsonTruckRep = try JSONEncoder().encode(truck)
+            guard let truckRep = truck.truckRepresentation else {
+                completion(NSError())
+                return
+            }
+            
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let jsonTruckRep = try encoder.encode(truckRep)
             request.httpBody = jsonTruckRep
         } catch {
             NSLog("Error Encoding Truck Representation Object to JSON for Edit: \(error)")
@@ -332,7 +357,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let error = error {
                 NSLog("Error PUT'n Edited Truck to Server: \(error)")
                 DispatchQueue.main.async {
@@ -351,16 +376,16 @@ class APIServices {
         }.resume()
     }
     
-    func deleteExistingTruck(truck: TruckRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer, let truckID = truck.id else { return }
+    func deleteExistingTruck(truck: Truck, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
         
-        let deleteExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)")
+        let deleteExistingTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.identifier)")
         var request = URLRequest(url: deleteExistingTruckURL)
         request.httpMethod = HTTPMethod.delete.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let error = error {
                 NSLog("Error DELETE'n Truck from Server: \(error)")
                 DispatchQueue.main.async {
@@ -379,17 +404,23 @@ class APIServices {
         }.resume()
     }
     
-    func addMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer, let truckID = truck.id else { return }
+    func addMenuItem(truck: Truck, menuItem: MenuItem, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
         
-        let addItemToTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/items")
+        let addItemToTruckURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.identifier)/items")
         var request = URLRequest(url: addItemToTruckURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
         do {
-            let jsonMenuItem = try JSONEncoder().encode(menuItem)
+            guard let item = menuItem.menuItemRepresentation else {
+                completion(NSError())
+                return
+            }
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let jsonMenuItem = try encoder.encode(item)
             request.httpBody = jsonMenuItem
         } catch {
             NSLog("Error Encoding Menu Item Representation to JSON for Add: \(error)")
@@ -397,7 +428,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 NSLog("Error POST'n Menu Item to Server: \(error)")
                 DispatchQueue.main.async {
@@ -412,21 +443,49 @@ class APIServices {
                 }
                 return
             }
+            guard let data = data else {
+                NSLog("Bad Data Returned by Data Task")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let jsonData = try JSONSerialization.jsonObject(with: data, options: [])
+                print(jsonData)
+                let menuItemRep = try decoder.decode(MenuItemRepresentation.self, from: data)
+                self.menuItemsByTruck.append(menuItemRep)
+            } catch {
+                NSLog("Error Decoding Menu Item Representation Object: \(error)")
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+                return
+            }
             completion(nil)
         }.resume()
     }
     
-    func editMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer, let truckID = truck.id, let itemID = menuItem.id else { return }
+    func editMenuItem(truck: Truck, menuItem: MenuItem, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
         
-        let editMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/item/\(itemID)")
+        let editMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.identifier)/item/\(menuItem.identifier)")
         var request = URLRequest(url: editMenuItemURL)
         request.httpMethod = HTTPMethod.put.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
         do {
-            let jsonEditedItem = try JSONEncoder().encode(menuItem)
+            guard let item = menuItem.menuItemRepresentation else {
+                completion(NSError())
+                return
+            }
+            
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let jsonEditedItem = try encoder.encode(item)
             request.httpBody = jsonEditedItem
         } catch {
             NSLog("Error Encoding Menu Item Representation to JSON for Edit: \(error)")
@@ -434,7 +493,7 @@ class APIServices {
             return
         }
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let error = error {
                 NSLog("Error PUT'n Edited Menu Item to Server: \(error)")
                 DispatchQueue.main.async {
@@ -453,16 +512,16 @@ class APIServices {
         }.resume()
     }
     
-    func deleteMenuItem(truck: TruckRepresentation, menuItem: MenuItemRepresentation, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer, let truckID = truck.id, let itemID = menuItem.id else { return }
+    func deleteMenuItemFromServer(truck: Truck, menuItem: MenuItem, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
         
-        let deleteMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truckID)/item/\(itemID)")
+        let deleteMenuItemURL = baseURL.appendingPathComponent("operator/\(bearer.id)/truck/\(truck.identifier)/item/\(menuItem.identifier)")
         var request = URLRequest(url: deleteMenuItemURL)
         request.httpMethod = HTTPMethod.delete.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request) { _, response, error in
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let error = error {
                 NSLog("Error DELETE'n Menu Item from Server: \(error)")
                 DispatchQueue.main.async {
@@ -479,5 +538,24 @@ class APIServices {
             }
             completion(nil)
         }.resume()
+    }
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            NSLog("Error Saving Managed Object Context: \(error)")
+            CoreDataStack.shared.mainContext.reset()
+        }
+    }
+    
+    func deleteTruck(truck: Truck) {
+        CoreDataStack.shared.mainContext.delete(truck)
+        saveToPersistentStore()
+    }
+    
+    func deleteMenuItem(item: MenuItem) {
+        CoreDataStack.shared.mainContext.delete(item)
+        saveToPersistentStore()
     }
 }

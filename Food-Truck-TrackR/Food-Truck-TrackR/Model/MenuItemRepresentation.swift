@@ -10,7 +10,7 @@ import Foundation
 
 struct MenuItemRepresentation: Codable {
     var name: String
-    var price: Double
+    var price: Int64
     var description: String?
-    var id: Int? = nil
+    var id: Int64? = nil
 }

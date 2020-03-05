@@ -14,16 +14,6 @@ struct TruckRepresentation: Codable {
     var image: String
     var cuisineType: String
     var physicalAddress: String
-    var latitude: Double?
-    var longitude: Double?
-    
-    enum TruckKeys: String, CodingKey {
-        case id
-        case name
-        case image
-        case cuisingType = "cuising_type"
-        case physicalAddress = "physical_address"
-    }
 }
 
 extension TruckRepresentation: Equatable {
