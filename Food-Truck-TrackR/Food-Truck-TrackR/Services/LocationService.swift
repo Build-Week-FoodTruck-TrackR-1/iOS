@@ -17,8 +17,22 @@ class LocationController: NSObject {
     var camera = MKMapCamera()
     weak var locationDataDelegate: LocationDataDelegate?
     
+    var trucks: [TruckRepresentation]? {
+        didSet {
+            for truck in trucks! {
+                print(truck.name)
+                getCoordinate(address: truck.physicalAddress) { (result) in
+                    if let coordinate = try? result.get() {
+                        self.coordinate2D = coordinate
+                    }
+                }
+            }
+        }
+    }
+    
     dynamic var coordinate2D: CLLocationCoordinate2D? {
         didSet {
+            addAnnotations(coordinate: coordinate2D!, trucks: trucks!)
         }
     }
     
@@ -36,19 +50,13 @@ class LocationController: NSObject {
     }
     
     // Add annotations
-    func addAnnotations(trucks: [TruckRepresentation]) {
-
+    func addAnnotations(coordinate: CLLocationCoordinate2D, trucks: [TruckRepresentation]) {
+        
         let mapItems = trucks.compactMap { (truck) -> MKMapItem? in
-            getCoordinate(address: "") { (result) in
-                if let coordinate = try? result.get() {
-                    print(coordinate)
-                }
-            }
-            
-            
-            let coordinate = CLLocationCoordinate2D(latitude: 25.919600, longitude: -80.212550)
+            let coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
             let placemark = MKPlacemark(coordinate: coordinate)
             let mapItem = MKMapItem(placemark: placemark)
+            print(truck.name)
             mapItem.name = truck.name
             return mapItem
          }

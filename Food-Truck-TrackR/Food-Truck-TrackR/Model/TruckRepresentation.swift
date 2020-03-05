@@ -10,10 +10,12 @@ import Foundation
 
 struct TruckRepresentation: Codable {
     var id: Int? = nil
-    var name: String
+    var name: String?
     var image: String
     var cuisineType: String
     var physicalAddress: String
+    var latitude: Double?
+    var longitude: Double?
     
     enum TruckKeys: String, CodingKey {
         case id
@@ -21,6 +23,12 @@ struct TruckRepresentation: Codable {
         case image
         case cuisingType = "cuising_type"
         case physicalAddress = "physical_address"
+    }
+}
+
+extension TruckRepresentation: Equatable {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.name != rhs.name
     }
 }
 

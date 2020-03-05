@@ -16,7 +16,7 @@ class TrucksAroundViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var locationController = LocationController()
-    var trucks = [TruckRepresentation]()
+    var trucks: [TruckRepresentation]!
     
     private enum AnnotationReuseID: String {
         case pin
@@ -33,7 +33,9 @@ class TrucksAroundViewController: UIViewController {
         mapView.delegate = self
         // Make sure `MKPinAnnotationView` and the reuse identifier is recognized in this map view.
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
-        locationController.addAnnotations(trucks: trucks)
+        
+        trucks = [TruckRepresentation(id: 1, name: "Mexicain Food", image: "", cuisineType: "", physicalAddress: "2145 NE 164th St, North Miami Beach, FL 33162"), TruckRepresentation(id: 2, name: "Chinese Food", image: "", cuisineType: "", physicalAddress: "16900 N Bay Rd, North Miami Beach, FL 33160"), TruckRepresentation(id: 3, name: "Peruvian food", image: "", cuisineType: "", physicalAddress: "14000 Biscayne Blvd, North Miami, FL 33181"), TruckRepresentation(id: 4, name: "Americain food", image: "", cuisineType: "", physicalAddress: "2375 NE 173rd St, North Miami Beach, FL 33160"), TruckRepresentation(id: 4, name: "Haitian food", image: "", cuisineType: "", physicalAddress: "12016 NE 16th Ave, Miami, FL 33161")]
+        locationController.trucks = trucks
     }
 }
 
@@ -62,14 +64,13 @@ extension TrucksAroundViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
+        print("Did select", view.annotation?.title)
     }
 }
 
 extension TrucksAroundViewController: LocationDataDelegate {
     
     func addAnnotation(_ annotations: [PlaceAnnotation]) {
-        print(annotations.count)
         mapView.addAnnotations(annotations)
     }
     
