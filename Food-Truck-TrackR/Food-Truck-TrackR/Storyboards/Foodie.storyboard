@@ -28,7 +28,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ezG-6V-fkM"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Trucks around you" id="rZc-LB-AD4"/>
+                    <navigationItem key="navigationItem" title="Trucks around you" id="rZc-LB-AD4">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="zzw-1z-ooT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="qQL-nr-sc7" id="vQc-Je-eBP"/>
                         <segue destination="6zC-Qo-3HW" kind="show" identifier="ViewMenuVC" id="Tll-cU-KgB"/>

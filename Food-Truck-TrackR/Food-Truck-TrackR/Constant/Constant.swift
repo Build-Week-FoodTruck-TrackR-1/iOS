@@ -27,9 +27,9 @@ enum AuthStatus: CustomStringConvertible {
     var description: String {
         switch self {
         case .signUp:
-            return "Sign Up"
+            return "SIGN UP"
         case .logIn:
-            return "Log In"
+            return "LOG IN"
         }
     }
 }

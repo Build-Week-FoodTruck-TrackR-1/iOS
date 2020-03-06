@@ -10,6 +10,15 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var operatorChoiceButton: UIButton!
+    @IBOutlet weak var foodieChoiceButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateViews()
+    }
     
     // MARK: - Functions
     
@@ -29,6 +38,14 @@ class WelcomeViewController: UIViewController {
                 destination.choice = choice
             }
         }
+    }
+    
+    func updateViews() {
+        logoImageView.image = UIImage(named: "FoodTruck_Logo")
+        operatorChoiceButton.backgroundColor = UIColor(#colorLiteral(red: 0.1704146564, green: 0.1961146891, blue: 0.7698651552, alpha: 1))
+        operatorChoiceButton.layer.cornerRadius = 8
+        foodieChoiceButton.backgroundColor = UIColor(#colorLiteral(red: 0.1704146564, green: 0.1961146891, blue: 0.7698651552, alpha: 1))
+        foodieChoiceButton.layer.cornerRadius = 8
     }
 }
 

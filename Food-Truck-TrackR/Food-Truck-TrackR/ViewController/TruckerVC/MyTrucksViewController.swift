@@ -19,7 +19,14 @@ class MyTrucksViewController: UIViewController {
 
     }
     
-
+    @IBAction func logOutButtonTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: Storyboard.Auth.rawValue, bundle: nil)
+        let nav = storyboard.instantiateViewController(withIdentifier: "AuthNav") as! UINavigationController
+        let _ = nav.topViewController as! WelcomeViewController
+        nav.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(nav, animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
