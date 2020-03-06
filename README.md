@@ -17,4 +17,5 @@ Every true "foodie" worth their salt knows that some of the best food in any cit
 - [Nick Nguyen iOS 14](https://github.com/tonic2000)
 
 
-
+# Misc:
+This project was create by Lambda iOS Students to display knowledge of networking basics and core data. Students demonstrated team work and creative skills to colloborate with each other to build a cohesive app.
