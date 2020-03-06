@@ -13,7 +13,7 @@
 
 - Micheal iOS 13
 - Kerby iOS 14
-- Nick Nguyen iOS 14
+- Nick Nguyen iOS 14 https://github.com/tonic2000
 
 
 
