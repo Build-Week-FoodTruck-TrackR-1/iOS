@@ -15,10 +15,7 @@ class MyTrucksViewController: UIViewController {
     
     var foodTruckController: FoodTruckController? {
         didSet {
-            guard let bearer = foodTruckController?.bearer else { return }
-            foodTruckController?.fetchTrucksByOperator(operatorID: bearer.id, completion: {
-                self.tableView.reloadData()
-            })
+            
             NSLog("\(String(describing: fetchedResultsController.fetchedObjects?.count))")
         }
     }
@@ -70,8 +67,6 @@ class MyTrucksViewController: UIViewController {
             menuVC.truck = truck
         }
     }
-    
-
 }
 
 // MARK: - UITableViewDelegate/UITableViewDataSource
@@ -94,8 +89,12 @@ extension MyTrucksViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if editingS
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let truck = fetchedResultsController.object(at: indexPath)
+            foodTruckController?.deleteTruck(truck: truck)
+            foodTruckController?.deleteFoodTruck(for: truck)
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

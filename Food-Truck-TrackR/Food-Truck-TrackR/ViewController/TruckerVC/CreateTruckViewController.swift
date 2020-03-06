@@ -17,6 +17,8 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
     var latitude: CLLocationDegrees?
     var coords: CLLocation?
     
+    
+    
     @IBOutlet weak var addTruckImageView: UIImageView!
     @IBOutlet weak var truckNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
@@ -29,7 +31,8 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
         truckNameTextField.delegate = self
         cuisineTypeTextField.delegate = self
         locationTextField.delegate = self
-        updateViews()   
+        updateViews()
+        addTruckImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
         
     }
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -48,12 +51,18 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
             NSLog("This is the location: \(location)")
         }
         
-        let truckRep = TruckRepresentation(id: UUID(), name: name, image: URL(string: "https://media-cdn.tripadvisor.com/media/photo-s/0f/f2/a6/1e/photo0jpg.jpg"), cuisineType: cuisineType, address: address, customerRatings: [5], ratingAvg: 5)
-        let truck = Truck(truckRepresentation: truckRep)!
+        if let data = addTruckImageView.image?.jpegData(compressionQuality: 1.0) {
+            let truckRep = TruckRepresentation(id: UUID(), name: name, image: data, cuisineType: cuisineType, address: address, customerRatings: [5], ratingAvg: 5)
+            
+            let truck = Truck(truckRepresentation: truckRep)!
+            foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
+        }
+        
+        
             
         foodTruckController?.saveToPersistentStore()
-        foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
-        
+//        foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
+        NSLog("\(bearer.id)")
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -76,6 +85,14 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
+    @objc private func handleSelectPhoto() {
+      let imagePickerController = UIImagePickerController()
+      imagePickerController.delegate = self
+      imagePickerController.allowsEditing = true
+       
+      present(imagePickerController, animated: true, completion: nil)
+    }
 
     
     // MARK: - Navigation
@@ -128,4 +145,21 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
         locationTextField.layer.borderWidth = 1.0
         locationTextField.layer.borderColor = UIColor.gray.cgColor
     }
+}
+
+extension CreateTruckViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+   
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true, completion: nil)
+  }
+   
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      addTruckImageView.image = editedImage
+       
+    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      addTruckImageView.image = originalImage
+    }
+    dismiss(animated: true, completion: nil)
+  }
 }

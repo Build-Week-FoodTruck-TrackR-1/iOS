@@ -126,7 +126,8 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
         } else {
             let storyboard = UIStoryboard(name: Storyboard.Foodie.rawValue, bundle: nil)
             let nav = storyboard.instantiateViewController(withIdentifier: "FoodieNav") as! UINavigationController
-            let _ = nav.topViewController as! TrucksAroundViewController
+            let truckAroundVC = nav.topViewController as! TrucksAroundViewController
+            truckAroundVC.foodTruckController = foodTruckController
             nav.modalPresentationStyle = .fullScreen
             self.navigationController?.present(nav, animated: true, completion: nil)
         }

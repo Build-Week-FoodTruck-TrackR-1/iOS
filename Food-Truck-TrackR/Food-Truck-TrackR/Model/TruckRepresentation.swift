@@ -9,14 +9,12 @@
 import Foundation
 
 struct TruckRepresentation: Codable, Equatable {
-    var id: UUID
+    var id: UUID = UUID()
     var name: String
-    var image: URL?
+    var image: Data?
     var cuisineType: String
     var address: String
-    var customerRatings: [Double]?
-    var ratingAvg: Double?
-    var latitude: Double?
-    var longitude: Double?
+    var customerRatings: [Double]? = [5]
+    var ratingAvg: Double? = 5
 }
 

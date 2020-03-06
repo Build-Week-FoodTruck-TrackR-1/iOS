@@ -34,19 +34,34 @@ class CreateDishViewController: UIViewController, UITextFieldDelegate, UITextVie
         dishNameTextField.delegate = self
         dishDesciptionTextView.delegate = self
         updateViews()
+        addDishImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard
             let name = dishNameTextField.text,
             let description = dishDesciptionTextView.text,
-            let price = dishPriceTextField.text,
-            let truck = truck
+            let price = dishPriceTextField.text
             else { return }
-        let menuItemRep = MenuItemRepresentation(name: name, price: Double(price)!, description: description, id: UUID(), images: [URL(string: "https://en.wikipedia.org/wiki/Taco#/media/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg")!], customerRatings: [5], ratingAvg: 5)
-        let newItem = MenuItem(menuItemRepresentation: menuItemRep)!
-        foodTruckController?.addMenuItem(for: truck, item: newItem)
-        navigationController?.popViewController(animated: true)
+        
+        if let data = addDishImageView.image?.jpegData(compressionQuality: 1.0) {
+            let itemRep = MenuItemRepresentation(name: name, price: Double(price)!, description: description, id: UUID(), images: data, customerRatings: [5], ratingAvg: 4.6)
+            let item = MenuItem(menuItemRepresentation: itemRep)!
+            try! CoreDataStack.shared.save()
+            foodTruckController?.addMenuItem(item: item)
+        }
+        DispatchQueue.main.async {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
+    @objc private func handleSelectPhoto() {
+      let imagePickerController = UIImagePickerController()
+      imagePickerController.delegate = self
+      imagePickerController.allowsEditing = true
+       
+      present(imagePickerController, animated: true, completion: nil)
     }
     
     /*
@@ -101,4 +116,21 @@ class CreateDishViewController: UIViewController, UITextFieldDelegate, UITextVie
         dishDesciptionTextView.layer.borderColor = UIColor.gray.cgColor
         dishDesciptionTextView.layer.borderWidth = 1.0
     }
+}
+
+extension CreateDishViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+   
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true, completion: nil)
+  }
+   
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      addDishImageView.image = editedImage
+       
+    } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+      addDishImageView.image = originalImage
+    }
+    dismiss(animated: true, completion: nil)
+  }
 }

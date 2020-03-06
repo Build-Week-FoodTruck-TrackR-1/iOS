@@ -11,7 +11,11 @@ import CoreData
 
 class MenuViewController: UIViewController, UITableViewDataSource {
 
-    var foodTruckController: FoodTruckController?
+    var foodTruckController: FoodTruckController? {
+        didSet {
+            
+        }
+    }
     
     var truck: Truck?
     
@@ -65,6 +69,7 @@ extension MenuViewController: UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as? MenuItemTableViewCell else { return UITableViewCell() }
         let menuItem = fetchedResultsController.object(at: indexPath)
         cell.menuItem = menuItem
+        
         return cell
     }
 }
@@ -84,6 +89,14 @@ extension MenuViewController: NSFetchedResultsControllerDelegate {
             menuTableView.deleteSections(IndexSet(integer: sectionIndex), with: .automatic)
         default:
             break
+        }
+        
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                let menuItem = fetchedResultsController.object(at: indexPath)
+                foodTruckController?.deleteMenuItem(item: menuItem)
+                foodTruckController?.deleteTruckMenuItem(item: menuItem)
+            }
         }
     }
     

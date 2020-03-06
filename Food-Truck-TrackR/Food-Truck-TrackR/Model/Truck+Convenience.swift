@@ -23,7 +23,7 @@ extension Truck {
         return TruckRepresentation(id: id, name: name, image: image, cuisineType: cuisineType, address: address, customerRatings: customerRatings, ratingAvg: ratingAvg)
     }
     
-    @discardableResult convenience init?(id: UUID, name: String, image: URL?, cuisineType: String, address: String?, customerRatings: [Double]?, ratingAvg: Double?, latitude: Double?, longitude: Double?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext ) {
+    @discardableResult convenience init?(id: UUID = UUID(), name: String, image: Data?, cuisineType: String, address: String?, customerRatings: [Double]? = [5], ratingAvg: Double? = 5, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         
         guard let rating = ratingAvg else { return nil }
         
@@ -50,8 +50,6 @@ extension Truck {
                   address: truckRepresentation.address,
                   customerRatings: truckRepresentation.customerRatings,
                   ratingAvg: truckRepresentation.ratingAvg,
-                  latitude: truckRepresentation.longitude,
-                  longitude: truckRepresentation.latitude,
                   context: context)
     }
 }

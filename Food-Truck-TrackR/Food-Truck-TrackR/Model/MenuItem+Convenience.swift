@@ -18,14 +18,14 @@ extension MenuItem {
             let id = identifier
             else { return nil }
         
-        return MenuItemRepresentation(name: name, price: price, description: itemDescription, id: id, images: images, customerRatings: customerRatings, ratingAvg: ratingAvg)
+        return MenuItemRepresentation(name: name, price: price, description: itemDescription, id: id, images: image, customerRatings: customerRatings, ratingAvg: ratingAvg)
     }
     
     @discardableResult convenience init?(name: String,
                                         price: Double,
                                         description: String?,
                                         id: UUID,
-                                        images: [URL]?,
+                                        images: Data?,
                                         customerRatings: [Double]?,
                                         ratingAvg: Double?,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
@@ -42,7 +42,7 @@ extension MenuItem {
         self.price = price
         self.itemDescription = dishDescription
         self.identifier = id
-        self.images = itemImages 
+        self.image = itemImages
         self.customerRatings = ratings 
         self.ratingAvg = average
     }

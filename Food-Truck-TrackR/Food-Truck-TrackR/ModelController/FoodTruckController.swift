@@ -51,8 +51,9 @@ class FoodTruckController {
                     self.trucks = fetchedTrucks
                     
                     for truckRep in self.trucks {
-                        Truck(truckRepresentation: truckRep, context: context)
-                        self.saveToPersistentStore()
+                        _ = Truck(truckRepresentation: truckRep, context: context)
+                        try context.save()
+//                        self.saveToPersistentStore()
                     }
                     DispatchQueue.main.async {
                         completion()
@@ -68,9 +69,39 @@ class FoodTruckController {
         })
     }
     
+    func fetchMenuItemsByTruck(truck: Truck, completion: @escaping () -> ()) {
+        guard let truckID = truck.identifier else { return }
+        menuItemRef.child("\(truckID)").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value else { return }
+            
+            let context = CoreDataStack.shared.container.newBackgroundContext()
+            context.perform {
+                do {
+                    let fetchedMenuItems = Array(try FirebaseDecoder().decode([String : MenuItemRepresentation].self, from: value).values)
+                    self.menuItems = fetchedMenuItems
+                    
+                    for item in self.menuItems {
+                        _ = MenuItem(menuItemRepresentation: item, context: context)
+                        try context.save()
+                    }
+                    
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch {
+                    NSLog("Error decoding MenuItem Objects: \(error)")
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                    return
+                }
+            }
+        }
+    }
+    
     func addFoodTruck(operatorID: Int, with truck: Truck) {
-//        guard let bearer = bearer else { return }
         guard let truckRep = truck.truckRepresentation else { return }
+        trucks.append(truckRep)
         let data = try! FirebaseEncoder().encode(truckRep)
         self.truckRef.child("\(operatorID)").child("\(truckRep.id)").setValue(data) {
             (error: Error?, ref: DatabaseReference) in
@@ -83,20 +114,26 @@ class FoodTruckController {
         }
     }
     
-    func deleteFoodTruck(for truck: TruckRepresentation) {
-        guard let truckToDelete = trucks.firstIndex(of: truck) else { return }
+    func deleteFoodTruck(for truck: Truck) {
+        guard
+            let truckRep = truck.truckRepresentation,
+            let truckToDelete = trucks.firstIndex(of: truckRep)
+            else { return }
         trucks.remove(at: truckToDelete)
-        truckRef.child("\(truck.id)").removeValue()
+        truckRef.child("\(truckRep.id)").removeValue()
     }
     
-    func addMenuItem(for truck: Truck, item: MenuItem) {
-        guard
-            let menuItemRep = item.menuItemRepresentation,
-            let id = truck.identifier
-            else { return }
+    func test(item: MenuItemRepresentation) {
+        let data = try! FirebaseEncoder().encode(item)
+        menuItemRef.child("\(item.id)").setValue(data)
+        NSLog("\(data)")
+    }
+    
+    func addMenuItem(truck: TruckRepresentation, item: MenuItemRepresentation) {
+        menuItems.append(item)
         
-        let data = try! FirebaseEncoder().encode(menuItemRep)
-        self.menuItemRef.child("\(id)").child("\(menuItemRep.id )").setValue(data) {
+        let data = try! FirebaseEncoder().encode(item)
+        self.menuItemRef.child("\(truck.id)").child("\(item.id)").setValue(data) {
             (error: Error?, ref: DatabaseReference) in
             if let error = error {
                 NSLog("Menu Item could not be save: \(error) for \(ref)")
@@ -106,10 +143,28 @@ class FoodTruckController {
         }
     }
     
-    func deleteMenuItem(item: MenuItemRepresentation) {
-        guard let itemToDelete = menuItems.firstIndex(of: item) else { return }
+    func addMenuItem(item: MenuItem) {
+        guard let menuItemRep = item.menuItemRepresentation else { return }
+
+        let data = try! FirebaseEncoder().encode(menuItemRep)
+        self.menuItemRef.child("\(menuItemRep.id )").setValue(data) {
+            (error: Error?, ref: DatabaseReference) in
+            if let error = error {
+                NSLog("Menu Item could not be save: \(error) for \(ref)")
+            } else {
+                NSLog("Menu Item saved successfully in \(ref)")
+            }
+        }
+    }
+    
+    func deleteMenuItem(item: MenuItem) {
+        guard
+            let menuItemRep = item.menuItemRepresentation,
+            let itemToDelete = menuItems.firstIndex(of: menuItemRep)
+            else { return }
+        
         menuItems.remove(at: itemToDelete)
-        menuItemRef.child("\(item.id)").removeValue()
+        menuItemRef.child("\(menuItemRep.id)").removeValue()
     }
     
     func operatorSignUp(truckOperator: Foodie, completion: @escaping (Error?) -> Void) {
@@ -303,7 +358,7 @@ class FoodTruckController {
         saveToPersistentStore()
     }
     
-    func deleteMenuItem(item: MenuItem) {
+    func deleteTruckMenuItem(item: MenuItem) {
         CoreDataStack.shared.mainContext.delete(item)
         saveToPersistentStore()
     }

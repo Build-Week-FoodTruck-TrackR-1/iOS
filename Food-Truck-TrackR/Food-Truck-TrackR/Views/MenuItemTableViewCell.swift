@@ -24,13 +24,13 @@ class MenuItemTableViewCell: UITableViewCell {
     func updateViews() {
         guard
             let menuItem = menuItem,
-            let imageURL = menuItem.images?.first
+            let image = menuItem.image
             else { return }
         
-        let data = try! Data(contentsOf: imageURL)
+        
         itemNameLabel.text = menuItem.name
-        itemDescriptionLabel.text = menuItem.description
+        itemDescriptionLabel.text = menuItem.itemDescription
         itemPriceLabel.text = "\(menuItem.price)"
-        itemImageView.image = UIImage(data: data)
+        itemImageView.image = UIImage(data: image)
     }
 }
