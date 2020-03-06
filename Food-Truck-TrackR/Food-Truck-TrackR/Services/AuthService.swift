@@ -6,8 +6,9 @@
 //  Copyright © 2020 Michael. All rights reserved.
 //
 
+/*
 import Foundation
-import FirebaseAuth
+
 
 class AuthService {
     
@@ -53,3 +54,4 @@ class AuthService {
         }
     }
 }
+*/

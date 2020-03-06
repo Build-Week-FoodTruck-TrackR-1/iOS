@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import CodableFirebase
 
 class TruckService {
     

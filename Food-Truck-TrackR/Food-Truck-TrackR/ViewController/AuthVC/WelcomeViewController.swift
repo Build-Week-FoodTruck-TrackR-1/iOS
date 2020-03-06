@@ -10,13 +10,18 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    let foodTruckController = FoodTruckController()
+    
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var operatorChoiceButton: UIButton!
     @IBOutlet weak var foodieChoiceButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let truck = TruckRepresentation(id: UUID(), name: "My Truck", image: nil, cuisineType: "Food", address: "555 Not Real MadeUpVille, CA 94987", customerRatings: nil, ratingAvg: nil, latitude: nil, longitude: nil)
+        foodTruckController.addFoodTruck(with: truck)
+        let menuItem = MenuItemRepresentation(name: "Tacos", price: 8.99, description: "Good Tacos", id: UUID(), images: nil, customerRatings: nil, ratingAvg: nil)
+        foodTruckController.addMenuItem(item: menuItem)
         updateViews()
     }
     

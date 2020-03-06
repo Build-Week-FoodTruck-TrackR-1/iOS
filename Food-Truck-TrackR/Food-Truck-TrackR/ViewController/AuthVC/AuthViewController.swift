@@ -12,6 +12,8 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
+    let foodTruckController = FoodTruckController()
+    
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var usernameField: UITextField!
@@ -33,7 +35,74 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Functions
     
     @IBAction func authButtonTapped(_ sender: UIButton) {
-        authenticateUser()
+        guard let username = usernameField.text, !username.isEmpty, let password = passwordField.text, !password.isEmpty else { return }
+            
+            let newUserSignUp = Foodie(email: username, password: password)
+            let newUserLogin = UserLogin(username: username, password: password)
+            if self.choice == Choice.foodie {
+                switch authStatus {
+                case .signUp:
+                    foodTruckController.dinerSignUp(diner: newUserSignUp) { _ in
+                        DispatchQueue.main.async {
+                            let alertController = UIAlertController(title: "Sign Up Successful!", message: "Please Log In...", preferredStyle: .alert)
+                            let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                            alertController.addAction(alertAction)
+                            self.present(alertController, animated: true) {
+                                self.authStatus = .logIn
+                                self.segmentedControl.selectedSegmentIndex = 1
+                                self.authButton.setTitle("Log In", for: .normal)
+                        }
+                    }
+                }
+                case .logIn:
+                    foodTruckController.dinerLogin(diner: newUserLogin) { _ in
+                        self.goToStoryboard()
+                    }
+                }
+            } else {
+                switch authStatus {
+                case .signUp:
+                    foodTruckController.operatorSignUp(truckOperator: newUserSignUp) { _ in
+                        DispatchQueue.main.async {
+                                let alertController = UIAlertController(title: "Sign Up Successful!", message: "Please Log In...", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                alertController.addAction(alertAction)
+                                self.present(alertController, animated: true) {
+                                    self.authStatus = .logIn
+                                    self.segmentedControl.selectedSegmentIndex = 1
+                                    self.authButton.setTitle("Login", for: .normal)
+                            }
+                        }
+                    }
+                case .logIn:
+                    foodTruckController.operatorLogin(truckOperator: newUserLogin) { _ in
+                        if self.foodTruckController.isUserLoggedIn {
+                            self.goToStoryboard()
+                        } else {
+                            let alertController = UIAlertController(title: "Login Unsuccessful!", message: "Please Log In...", preferredStyle: .alert)
+                                let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                                alertController.addAction(alertAction)
+                                self.present(alertController, animated: true) {
+                                    self.authStatus = .logIn
+                                    self.segmentedControl.selectedSegmentIndex = 1
+                                    self.authButton.setTitle("Login", for: .normal)
+                            }
+                        }
+                    }
+                }
+            }
+        
+        
+        @IBAction func ChoiceValueChanged(_ sender: UISegmentedControl) {
+            
+            if sender.selectedSegmentIndex == 0 {
+                authStatus = .signUp
+                authButton.setTitle(authStatus.description, for: .normal)
+            } else {
+                authStatus = .logIn
+                authButton.setTitle(authStatus.description, for: .normal)
+            }
+        }
     }
     
     

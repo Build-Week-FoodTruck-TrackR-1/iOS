@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>606220318015-nbirlesjtt56a6ebsnelfh9lemvi0m53.apps.googleusercontent.com</string>
+	<string>523968562747-2b33dn62b9jh0bp6s97qa4c1k3cvgcos.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.606220318015-nbirlesjtt56a6ebsnelfh9lemvi0m53</string>
+	<string>com.googleusercontent.apps.523968562747-2b33dn62b9jh0bp6s97qa4c1k3cvgcos</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCsmLDTcy5kI8d3TjsxkCwYNaN_DXcN7KI</string>
+	<string>AIzaSyAn2aihpL0h4x0dT5TRqxbR4zJYo7mMZRs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>606220318015</string>
+	<string>523968562747</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.MichaelMcGrath.Food-Truck-TrackR</string>
+	<string>com.lambdaSchool.FoodTruckTracker</string>
 	<key>PROJECT_ID</key>
-	<string>foodtruck-b3b1e</string>
+	<string>food-truck-trackr-2e9ff</string>
 	<key>STORAGE_BUCKET</key>
-	<string>foodtruck-b3b1e.appspot.com</string>
+	<string>food-truck-trackr-2e9ff.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:606220318015:ios:bfbf3c6a2f010a84864f8a</string>
+	<string>1:523968562747:ios:2fdc688cf218f71193be1e</string>
 	<key>DATABASE_URL</key>
-	<string>https://foodtruck-b3b1e.firebaseio.com</string>
+	<string>https://food-truck-trackr-2e9ff.firebaseio.com</string>
 </dict>
 </plist>

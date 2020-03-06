@@ -5,17 +5,9 @@ target 'Food-Truck-TrackR' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Food-Truck-TrackR
-
-  pod 'Firebase'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-  pod 'CodableFirebase'
-  pod 'SwiftLint'
-
-  target 'Food-Truck-TrackRTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  # Pods for Food-Truck-TrackR 
+ pod 'Firebase/Database'
+ pod 'Firebase/Analytics'
+ pod 'CodableFirebase' 
+ pod 'SwiftLint'
 end
