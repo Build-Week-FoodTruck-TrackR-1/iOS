@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CreateTruckViewController: UIViewController, UITextFieldDelegate {
 
+    var foodTruckController: FoodTruckController?
+    
+    var longitude: CLLocationDegrees?
+    var latitude: CLLocationDegrees?
+    var coords: CLLocation?
     
     @IBOutlet weak var addTruckImageView: UIImageView!
     @IBOutlet weak var truckNameTextField: UITextField!
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var cuisineTypeTextField: UITextField!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,17 +32,61 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
         updateViews()   
         
     }
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard
+            let name = truckNameTextField.text,
+            let cuisineType = cuisineTypeTextField.text,
+            let address = locationTextField.text,
+            let bearer = foodTruckController?.bearer
+            else { return }
+        
+        getCoordinate(addressString: address) { (location, error) in
+            self.longitude = location.longitude
+            self.latitude = location.latitude
+            
+            NSLog("This is the error: \(String(describing: error))")
+            NSLog("This is the location: \(location)")
+        }
+        
+        let truckRep = TruckRepresentation(id: UUID(), name: name, image: URL(string: "https://media-cdn.tripadvisor.com/media/photo-s/0f/f2/a6/1e/photo0jpg.jpg"), cuisineType: cuisineType, address: address, customerRatings: [5], ratingAvg: 5)
+        let truck = Truck(truckRepresentation: truckRep)!
+            
+        foodTruckController?.saveToPersistentStore()
+        foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
+        
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func getCoordinate( addressString : String,
+                        completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                    self.coords = placemark.location!
+                    completionHandler(location.coordinate, nil)
+    
+                    return
+                }
+            }
+                
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+        }
+    }
+    
     
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "MenuSegue" {
+            guard let menuVC = segue.destination as? MenuViewController else { return }
+            menuVC.foodTruckController = foodTruckController
+        }
     }
-    */
+    
 
     func updateViews() {
         truckNameTextField.layer.cornerRadius = 8

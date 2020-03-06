@@ -10,20 +10,22 @@ import Foundation
 import CoreData
 
 extension MenuItem {
+    
+    
     var menuItemRepresentation: MenuItemRepresentation? {
         guard
             let name = name,
             let id = identifier
             else { return nil }
         
-        return MenuItemRepresentation(name: name, price: price, description: itemDescription, id: id, images: images as? [Data], customerRatings: customerRatings as? [Double], ratingAvg: ratingAvg)
+        return MenuItemRepresentation(name: name, price: price, description: itemDescription, id: id, images: images, customerRatings: customerRatings, ratingAvg: ratingAvg)
     }
     
     @discardableResult convenience init?(name: String,
                                         price: Double,
                                         description: String?,
                                         id: UUID,
-                                        images: [Data]?,
+                                        images: [URL]?,
                                         customerRatings: [Double]?,
                                         ratingAvg: Double?,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
@@ -40,8 +42,8 @@ extension MenuItem {
         self.price = price
         self.itemDescription = dishDescription
         self.identifier = id
-        self.images = itemImages as NSObject
-        self.customerRatings = ratings as NSObject
+        self.images = itemImages 
+        self.customerRatings = ratings 
         self.ratingAvg = average
     }
     

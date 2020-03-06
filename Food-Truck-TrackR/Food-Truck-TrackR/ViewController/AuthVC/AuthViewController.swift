@@ -32,6 +32,15 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
         updateViews()
     }
     
+    @IBAction func choiceValueChanged(_ sender: Any) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            authStatus = .signUp
+            authButton.setTitle(authStatus.description, for: .normal)
+        } else {
+            authStatus = .logIn
+            authButton.setTitle(authStatus.description, for: .normal)
+        }
+    }
     // MARK: - Functions
     
     @IBAction func authButtonTapped(_ sender: UIButton) {
@@ -91,51 +100,27 @@ class AuthViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
-        
-        
-        @IBAction func ChoiceValueChanged(_ sender: UISegmentedControl) {
-            
-            if sender.selectedSegmentIndex == 0 {
-                authStatus = .signUp
-                authButton.setTitle(authStatus.description, for: .normal)
-            } else {
-                authStatus = .logIn
-                authButton.setTitle(authStatus.description, for: .normal)
-            }
         }
-    }
-    
-    
-    @IBAction func ChoiceValueChanged(_ sender: UISegmentedControl) {
         
-        if sender.selectedSegmentIndex == 0 {
-            authStatus = .signUp
-            authButton.setTitle(authStatus.description, for: .normal)
-        } else {
-            authStatus = .logIn
-            authButton.setTitle(authStatus.description, for: .normal)
-        }
-    }
-    
-    
-    func authenticateUser() {
-        if let username = usernameField.text, !username.isEmpty,
-            let pass = passwordField.text, !pass.isEmpty {
-            // Verify auth status state
-            if authStatus == .signUp {
-                goToStoryboard()
-            } else {
-                //Login user
-                goToStoryboard()
-            }
-        }
-    }
+//    func authenticateUser() {
+//        if let username = usernameField.text, !username.isEmpty,
+//            let pass = passwordField.text, !pass.isEmpty {
+//            // Verify auth status state
+//            if authStatus == .signUp {
+//                goToStoryboard()
+//            } else {
+//                //Login user
+//                goToStoryboard()
+//            }
+//        }
+//    }
     
     func goToStoryboard() {
         if choice == .trucker {
             let storyboard = UIStoryboard(name: Storyboard.Trucker.rawValue, bundle: nil)
             let nav = storyboard.instantiateViewController(withIdentifier: "TruckerNav") as! UINavigationController
-            let _ = nav.topViewController as! MyTrucksViewController
+            let myTruckVC = nav.topViewController as! MyTrucksViewController
+            myTruckVC.foodTruckController = foodTruckController
             nav.modalPresentationStyle = .fullScreen
             self.navigationController?.present(nav, animated: true, completion: nil)
         } else {

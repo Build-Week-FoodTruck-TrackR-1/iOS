@@ -10,6 +10,8 @@ import Foundation
 import CoreData
 
 extension Truck {
+    
+    
     var truckRepresentation: TruckRepresentation? {
         guard
             let id = identifier,
@@ -18,16 +20,12 @@ extension Truck {
             let address = address
             else { return nil }
         
-        return TruckRepresentation(id: id, name: name, image: image, cuisineType: cuisineType, address: address, customerRatings: customerRatings as? [Int64], ratingAvg: ratingAvg, latitude: latitude, longitude: longitude)
+        return TruckRepresentation(id: id, name: name, image: image, cuisineType: cuisineType, address: address, customerRatings: customerRatings, ratingAvg: ratingAvg)
     }
     
-    @discardableResult convenience init?(id: UUID, name: String, image: Data?, cuisineType: String, address: String?, customerRatings: [Int64]?, ratingAvg: Double?, latitude: Double?, longitude: Double?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext ) {
+    @discardableResult convenience init?(id: UUID, name: String, image: URL?, cuisineType: String, address: String?, customerRatings: [Double]?, ratingAvg: Double?, latitude: Double?, longitude: Double?, context: NSManagedObjectContext = CoreDataStack.shared.mainContext ) {
         
-        guard
-            let rating = ratingAvg,
-            let long = longitude,
-            let lat = latitude
-            else { return nil }
+        guard let rating = ratingAvg else { return nil }
         
         self.init(context: context)
         self.identifier = id
@@ -35,10 +33,9 @@ extension Truck {
         self.image = image
         self.cuisineType = cuisineType
         self.address = address
-        self.customerRatings = customerRatings as NSObject?
+        self.customerRatings = customerRatings
         self.ratingAvg = rating
-        self.longitude = long
-        self.latitude = lat
+        
     }
     
     @discardableResult convenience init?(truckRepresentation: TruckRepresentation,

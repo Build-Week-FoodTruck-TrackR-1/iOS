@@ -13,7 +13,7 @@ struct MenuItemRepresentation: Codable, Equatable {
     var price: Double
     var description: String?
     var id: UUID
-    var images: [Data]?
+    var images: [URL]?
     var customerRatings: [Double]?
     var ratingAvg: Double?
 }

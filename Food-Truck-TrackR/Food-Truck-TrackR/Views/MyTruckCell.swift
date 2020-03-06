@@ -26,6 +26,18 @@ class MyTruckCell: UITableViewCell {
     }
     
     private func updateViews() {
-    
+        guard
+            let truck = truck,
+            let image = truck.image,
+            let imageURL = URL(string: "https://media-cdn.tripadvisor.com/media/photo-s/0f/f2/a6/1e/photo0jpg.jpg")
+            else { return }
+        
+        let data = try! Data(contentsOf: imageURL)
+        truckImageView.image = UIImage(data: data)
+        cuisineTypeLabel.text = truck.cuisineType
+        locationLabel.text = truck.address
+        ratingLabel.text = "\(truck.ratingAvg) Stars"
+        
+        
     }
 }

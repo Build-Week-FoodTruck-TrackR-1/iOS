@@ -130,6 +130,9 @@
                                             <segment title="Sign Up"/>
                                             <segment title="Log In"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="choiceValueChanged:" destination="AGx-GD-Z66" eventType="valueChanged" id="wyt-La-eDJ"/>
+                                        </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lvN-uQ-BBb">
                                         <rect key="frame" x="0.0" y="263" width="374" height="120"/>
@@ -204,6 +207,7 @@
                         <outlet property="authButton" destination="ZTx-so-hCO" id="bi1-QB-hZK"/>
                         <outlet property="logoImageView" destination="7jL-uG-vIo" id="NZ4-YB-gO7"/>
                         <outlet property="passwordField" destination="6Lh-kB-gI8" id="YSu-gU-xJQ"/>
+                        <outlet property="segmentedControl" destination="9qA-7n-vHx" id="Jou-d3-W0o"/>
                         <outlet property="truckLogoImageView" destination="p4z-Oi-mFj" id="NfU-rZ-5xd"/>
                         <outlet property="usernameField" destination="yba-cd-swy" id="uhJ-Pv-hlu"/>
                     </connections>

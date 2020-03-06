@@ -10,6 +10,18 @@ import UIKit
 
 class CreateDishViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
 
+    var foodTruckController: FoodTruckController? {
+        didSet {
+            
+        }
+    }
+    
+    var truck: Truck? {
+        didSet {
+            
+        }
+    }
+    
     @IBOutlet weak var addDishImageView: UIImageView!
     @IBOutlet weak var dishNameTextField: UITextField!
     @IBOutlet weak var dishDesciptionTextView: UITextView!
@@ -24,7 +36,19 @@ class CreateDishViewController: UIViewController, UITextFieldDelegate, UITextVie
         updateViews()
     }
     
-
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard
+            let name = dishNameTextField.text,
+            let description = dishDesciptionTextView.text,
+            let price = dishPriceTextField.text,
+            let truck = truck
+            else { return }
+        let menuItemRep = MenuItemRepresentation(name: name, price: Double(price)!, description: description, id: UUID(), images: [URL(string: "https://en.wikipedia.org/wiki/Taco#/media/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg")!], customerRatings: [5], ratingAvg: 5)
+        let newItem = MenuItem(menuItemRepresentation: menuItemRep)!
+        foodTruckController?.addMenuItem(for: truck, item: newItem)
+        navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

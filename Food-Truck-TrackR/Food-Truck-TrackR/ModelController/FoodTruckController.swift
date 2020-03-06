@@ -21,7 +21,7 @@ class FoodTruckController {
     
     private let baseURL = URL(string: "https://foodtrucktrackr.herokuapp.com/api/")!
     
-    private var bearer: Bearer?
+    var bearer: Bearer?
     
     let truckRef: DatabaseReference = Database.database().reference().child("Truck")
     
@@ -39,10 +39,40 @@ class FoodTruckController {
     
     var menuItems: [MenuItemRepresentation] = []
     
-    func addFoodTruck(with truck: TruckRepresentation) {
-        trucks.append(truck)
-        let data = try! FirebaseEncoder().encode(truck)
-        self.truckRef.child("\(truck.id)").setValue(data) {
+    func fetchTrucksByOperator(operatorID: Int, completion: @escaping () -> ()) {
+        guard let bearer = bearer else { return }
+        truckRef.child("\(bearer.id)").observeSingleEvent(of: .value, with: { snapshot in
+            guard let value = snapshot.value else { return }
+            let context = CoreDataStack.shared.container.newBackgroundContext()
+            
+            context.perform {
+                do {
+                    let fetchedTrucks = Array(try FirebaseDecoder().decode([String : TruckRepresentation].self, from: value).values)
+                    self.trucks = fetchedTrucks
+                    
+                    for truckRep in self.trucks {
+                        Truck(truckRepresentation: truckRep, context: context)
+                        self.saveToPersistentStore()
+                    }
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                } catch let error {
+                    NSLog("Error decoding Truck Objects: \(error)")
+                    DispatchQueue.main.async {
+                        completion()
+                    }
+                    return
+                }
+            }
+        })
+    }
+    
+    func addFoodTruck(operatorID: Int, with truck: Truck) {
+//        guard let bearer = bearer else { return }
+        guard let truckRep = truck.truckRepresentation else { return }
+        let data = try! FirebaseEncoder().encode(truckRep)
+        self.truckRef.child("\(operatorID)").child("\(truckRep.id)").setValue(data) {
             (error: Error?, ref: DatabaseReference) in
             if let error = error {
                 NSLog("Truck could not be saved: \(error) for \(ref)")
@@ -59,10 +89,14 @@ class FoodTruckController {
         truckRef.child("\(truck.id)").removeValue()
     }
     
-    func addMenuItem(item: MenuItemRepresentation) {
-        menuItems.append(item)
-        let data = try! FirebaseEncoder().encode(item)
-        self.menuItemRef.child("\(item.id)").setValue(data) {
+    func addMenuItem(for truck: Truck, item: MenuItem) {
+        guard
+            let menuItemRep = item.menuItemRepresentation,
+            let id = truck.identifier
+            else { return }
+        
+        let data = try! FirebaseEncoder().encode(menuItemRep)
+        self.menuItemRef.child("\(id)").child("\(menuItemRep.id )").setValue(data) {
             (error: Error?, ref: DatabaseReference) in
             if let error = error {
                 NSLog("Menu Item could not be save: \(error) for \(ref)")
@@ -254,4 +288,30 @@ class FoodTruckController {
             }
         }.resume()
     }
+    
+    func saveToPersistentStore() {
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            NSLog("Error Saving Managed Object Context: \(error)")
+            CoreDataStack.shared.mainContext.reset()
+        }
+    }
+    
+    func deleteTruck(truck: Truck) {
+        CoreDataStack.shared.mainContext.delete(truck)
+        saveToPersistentStore()
+    }
+    
+    func deleteMenuItem(item: MenuItem) {
+        CoreDataStack.shared.mainContext.delete(item)
+        saveToPersistentStore()
+    }
+    
+    private func update(truck: Truck, with representation: TruckRepresentation) {
+        truck.name = representation.name
+        truck.identifier = representation.id
+        truck.cuisineType = representation.cuisineType
+    }
+
 }
