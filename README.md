@@ -14,7 +14,7 @@ Every true "foodie" worth their salt knows that some of the best food in any cit
 
 - Micheal iOS 13
 - Kerby iOS 14
-- Nick Nguyen iOS 14 @tonic2000
+- Nick Nguyen iOS 14 
 
 
 
