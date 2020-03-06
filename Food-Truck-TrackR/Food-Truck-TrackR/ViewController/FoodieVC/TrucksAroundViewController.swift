@@ -18,7 +18,7 @@ class TrucksAroundViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
    
   var locationController = LocationController()
-  var trucks: [Truck] = []
+  var trucks: [TruckRepresentation] = []
    
     
     var foodTruckController: FoodTruckController?
@@ -39,9 +39,22 @@ class TrucksAroundViewController: UIViewController {
     // Make sure `MKPinAnnotationView` and the reuse identifier is recognized in this map view.
         mapView.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: AnnotationReuseID.pin.rawValue)
      
-//        trucksReps = [TruckRepresentation(id: 1, name: "Mexicain Food", image: "", cuisineType: "", physicalAddress: "2145 NE 164th St, North Miami Beach, FL 33162"), TruckRepresentation(id: 2, name: "Chinese Food", image: "", cuisineType: "", physicalAddress: "16900 N Bay Rd, North Miami Beach, FL 33160"), TruckRepresentation(id: 3, name: "Peruvian food", image: "", cuisineType: "", physicalAddress: "14000 Biscayne Blvd, North Miami, FL 33181"), TruckRepresentation(id: 4, name: "Americain food", image: "", cuisineType: "", physicalAddress: "2375 NE 173rd St, North Miami Beach, FL 33160"), TruckRepresentation(id: 4, name: "Haitian food", image: "", cuisineType: "", physicalAddress: "12016 NE 16th Ave, Miami, FL 33161")]
-        locationController.trucks = foodTruckController?.trucks
+        trucks = [TruckRepresentation(id: UUID(), name: "Jorge's Bomb AF Taco Truck", image: nil, cuisineType: "Mexican", address: "701 Arguello St Redwood City, CA 94063", customerRatings: [5], ratingAvg: 4.7)]
+        locationController.trucks = trucks
   }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MapSegue" {
+            
+            let destination = segue.destination as! UINavigationController
+            let detailsVC = destination.topViewController as! FoodTruckDetailViewController
+        
+            
+            if let sender = sender as? TruckRepresentation {
+                 detailsVC.truck = sender
+            }
+        }
+    }
 }
 // MARK: - MKMapViewDelegate
 extension TrucksAroundViewController: MKMapViewDelegate {
@@ -67,8 +80,10 @@ extension TrucksAroundViewController: MKMapViewDelegate {
   }
    
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    print("Did select", view.annotation?.title)
-  }
+
+    let truck = trucks.filter({$0.name == view.annotation?.title})
+    self.performSegue(withIdentifier: "MapSegue", sender: truck)
+    }
 }
 extension TrucksAroundViewController: LocationDataDelegate {
    
@@ -77,11 +92,11 @@ extension TrucksAroundViewController: LocationDataDelegate {
   }
    
   func selectedAnnotation(_ title: String) {
-     
+     self.performSegue(withIdentifier: "MapSegue", sender: self)
   }
    
   func deselectedAnnotation() {
-     
+    
   }
    
   func addRegion(_ region: MKCoordinateRegion) {

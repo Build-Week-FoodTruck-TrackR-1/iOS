@@ -94,7 +94,7 @@ extension MenuViewController: NSFetchedResultsControllerDelegate {
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             if editingStyle == .delete {
                 let menuItem = fetchedResultsController.object(at: indexPath)
-                foodTruckController?.deleteMenuItem(item: menuItem)
+//                foodTruckController?.deleteMenuItem(item: menuItem)
                 foodTruckController?.deleteTruckMenuItem(item: menuItem)
             }
         }

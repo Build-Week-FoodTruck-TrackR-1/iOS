@@ -6,8 +6,6 @@ target 'Food-Truck-TrackR' do
   use_frameworks!
 
   # Pods for Food-Truck-TrackR 
- pod 'Firebase/Database'
- pod 'Firebase/Analytics'
  pod 'CodableFirebase' 
  pod 'SwiftLint'
 end

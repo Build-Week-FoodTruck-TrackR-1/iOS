@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Firebase
-import CodableFirebase
+//import Firebase
+//import CodableFirebase
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -23,9 +23,9 @@ class FoodTruckController {
     
     var bearer: Bearer?
     
-    let truckRef: DatabaseReference = Database.database().reference().child("Truck")
-    
-    let menuItemRef: DatabaseReference = Database.database().reference().child("MenuItem")
+//    let truckRef: DatabaseReference = Database.database().reference().child("Truck")
+//    
+//    let menuItemRef: DatabaseReference = Database.database().reference().child("MenuItem")
     
     var isUserLoggedIn: Bool {
         if bearer == nil {
@@ -39,133 +39,133 @@ class FoodTruckController {
     
     var menuItems: [MenuItemRepresentation] = []
     
-    func fetchTrucksByOperator(operatorID: Int, completion: @escaping () -> ()) {
-        guard let bearer = bearer else { return }
-        truckRef.child("\(bearer.id)").observeSingleEvent(of: .value, with: { snapshot in
-            guard let value = snapshot.value else { return }
-            let context = CoreDataStack.shared.container.newBackgroundContext()
-            
-            context.perform {
-                do {
-                    let fetchedTrucks = Array(try FirebaseDecoder().decode([String : TruckRepresentation].self, from: value).values)
-                    self.trucks = fetchedTrucks
-                    
-                    for truckRep in self.trucks {
-                        _ = Truck(truckRepresentation: truckRep, context: context)
-                        try context.save()
-//                        self.saveToPersistentStore()
-                    }
-                    DispatchQueue.main.async {
-                        completion()
-                    }
-                } catch let error {
-                    NSLog("Error decoding Truck Objects: \(error)")
-                    DispatchQueue.main.async {
-                        completion()
-                    }
-                    return
-                }
-            }
-        })
-    }
-    
-    func fetchMenuItemsByTruck(truck: Truck, completion: @escaping () -> ()) {
-        guard let truckID = truck.identifier else { return }
-        menuItemRef.child("\(truckID)").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value else { return }
-            
-            let context = CoreDataStack.shared.container.newBackgroundContext()
-            context.perform {
-                do {
-                    let fetchedMenuItems = Array(try FirebaseDecoder().decode([String : MenuItemRepresentation].self, from: value).values)
-                    self.menuItems = fetchedMenuItems
-                    
-                    for item in self.menuItems {
-                        _ = MenuItem(menuItemRepresentation: item, context: context)
-                        try context.save()
-                    }
-                    
-                    DispatchQueue.main.async {
-                        completion()
-                    }
-                } catch {
-                    NSLog("Error decoding MenuItem Objects: \(error)")
-                    DispatchQueue.main.async {
-                        completion()
-                    }
-                    return
-                }
-            }
-        }
-    }
-    
-    func addFoodTruck(operatorID: Int, with truck: Truck) {
-        guard let truckRep = truck.truckRepresentation else { return }
-        trucks.append(truckRep)
-        let data = try! FirebaseEncoder().encode(truckRep)
-        self.truckRef.child("\(operatorID)").child("\(truckRep.id)").setValue(data) {
-            (error: Error?, ref: DatabaseReference) in
-            if let error = error {
-                NSLog("Truck could not be saved: \(error) for \(ref)")
-            } else {
-                NSLog("Truck saved successfully in \(ref)")
-                
-            }
-        }
-    }
-    
-    func deleteFoodTruck(for truck: Truck) {
-        guard
-            let truckRep = truck.truckRepresentation,
-            let truckToDelete = trucks.firstIndex(of: truckRep)
-            else { return }
-        trucks.remove(at: truckToDelete)
-        truckRef.child("\(truckRep.id)").removeValue()
-    }
-    
-    func test(item: MenuItemRepresentation) {
-        let data = try! FirebaseEncoder().encode(item)
-        menuItemRef.child("\(item.id)").setValue(data)
-        NSLog("\(data)")
-    }
-    
-    func addMenuItem(truck: TruckRepresentation, item: MenuItemRepresentation) {
-        menuItems.append(item)
-        
-        let data = try! FirebaseEncoder().encode(item)
-        self.menuItemRef.child("\(truck.id)").child("\(item.id)").setValue(data) {
-            (error: Error?, ref: DatabaseReference) in
-            if let error = error {
-                NSLog("Menu Item could not be save: \(error) for \(ref)")
-            } else {
-                NSLog("Menu Item saved successfully in \(ref)")
-            }
-        }
-    }
-    
-    func addMenuItem(item: MenuItem) {
-        guard let menuItemRep = item.menuItemRepresentation else { return }
-
-        let data = try! FirebaseEncoder().encode(menuItemRep)
-        self.menuItemRef.child("\(menuItemRep.id )").setValue(data) {
-            (error: Error?, ref: DatabaseReference) in
-            if let error = error {
-                NSLog("Menu Item could not be save: \(error) for \(ref)")
-            } else {
-                NSLog("Menu Item saved successfully in \(ref)")
-            }
-        }
-    }
-    
-    func deleteMenuItem(item: MenuItem) {
-        guard
-            let menuItemRep = item.menuItemRepresentation,
-            let itemToDelete = menuItems.firstIndex(of: menuItemRep)
-            else { return }
-        
-        menuItems.remove(at: itemToDelete)
-        menuItemRef.child("\(menuItemRep.id)").removeValue()
-    }
+//    func fetchTrucksByOperator(operatorID: Int, completion: @escaping () -> ()) {
+//        guard let bearer = bearer else { return }
+//        truckRef.child("\(bearer.id)").observeSingleEvent(of: .value, with: { snapshot in
+//            guard let value = snapshot.value else { return }
+//            let context = CoreDataStack.shared.container.newBackgroundContext()
+//
+//            context.perform {
+//                do {
+//                    let fetchedTrucks = Array(try FirebaseDecoder().decode([String : TruckRepresentation].self, from: value).values)
+//                    self.trucks = fetchedTrucks
+//
+//                    for truckRep in self.trucks {
+//                        _ = Truck(truckRepresentation: truckRep, context: context)
+//                        try context.save()
+////                        self.saveToPersistentStore()
+//                    }
+//                    DispatchQueue.main.async {
+//                        completion()
+//                    }
+//                } catch let error {
+//                    NSLog("Error decoding Truck Objects: \(error)")
+//                    DispatchQueue.main.async {
+//                        completion()
+//                    }
+//                    return
+//                }
+//            }
+//        })
+//    }
+//
+//    func fetchMenuItemsByTruck(truck: Truck, completion: @escaping () -> ()) {
+//        guard let truckID = truck.identifier else { return }
+//        menuItemRef.child("\(truckID)").observeSingleEvent(of: .value) { snapshot in
+//            guard let value = snapshot.value else { return }
+//
+//            let context = CoreDataStack.shared.container.newBackgroundContext()
+//            context.perform {
+//                do {
+//                    let fetchedMenuItems = Array(try FirebaseDecoder().decode([String : MenuItemRepresentation].self, from: value).values)
+//                    self.menuItems = fetchedMenuItems
+//
+//                    for item in self.menuItems {
+//                        _ = MenuItem(menuItemRepresentation: item, context: context)
+//                        try context.save()
+//                    }
+//
+//                    DispatchQueue.main.async {
+//                        completion()
+//                    }
+//                } catch {
+//                    NSLog("Error decoding MenuItem Objects: \(error)")
+//                    DispatchQueue.main.async {
+//                        completion()
+//                    }
+//                    return
+//                }
+//            }
+//        }
+//    }
+//
+//    func addFoodTruck(operatorID: Int, with truck: Truck) {
+//        guard let truckRep = truck.truckRepresentation else { return }
+//        trucks.append(truckRep)
+//        let data = try! FirebaseEncoder().encode(truckRep)
+//        self.truckRef.child("\(operatorID)").child("\(truckRep.id)").setValue(data) {
+//            (error: Error?, ref: DatabaseReference) in
+//            if let error = error {
+//                NSLog("Truck could not be saved: \(error) for \(ref)")
+//            } else {
+//                NSLog("Truck saved successfully in \(ref)")
+//
+//            }
+//        }
+//    }
+//
+//    func deleteFoodTruck(for truck: Truck) {
+//        guard
+//            let truckRep = truck.truckRepresentation,
+//            let truckToDelete = trucks.firstIndex(of: truckRep)
+//            else { return }
+//        trucks.remove(at: truckToDelete)
+//        truckRef.child("\(truckRep.id)").removeValue()
+//    }
+//
+//    func test(item: MenuItemRepresentation) {
+//        let data = try! FirebaseEncoder().encode(item)
+//        menuItemRef.child("\(item.id)").setValue(data)
+//        NSLog("\(data)")
+//    }
+//
+//    func addMenuItem(truck: TruckRepresentation, item: MenuItemRepresentation) {
+//        menuItems.append(item)
+//
+//        let data = try! FirebaseEncoder().encode(item)
+//        self.menuItemRef.child("\(truck.id)").child("\(item.id)").setValue(data) {
+//            (error: Error?, ref: DatabaseReference) in
+//            if let error = error {
+//                NSLog("Menu Item could not be save: \(error) for \(ref)")
+//            } else {
+//                NSLog("Menu Item saved successfully in \(ref)")
+//            }
+//        }
+//    }
+//
+//    func addMenuItem(item: MenuItem) {
+//        guard let menuItemRep = item.menuItemRepresentation else { return }
+//
+//        let data = try! FirebaseEncoder().encode(menuItemRep)
+//        self.menuItemRef.child("\(menuItemRep.id )").setValue(data) {
+//            (error: Error?, ref: DatabaseReference) in
+//            if let error = error {
+//                NSLog("Menu Item could not be save: \(error) for \(ref)")
+//            } else {
+//                NSLog("Menu Item saved successfully in \(ref)")
+//            }
+//        }
+//    }
+//
+//    func deleteMenuItem(item: MenuItem) {
+//        guard
+//            let menuItemRep = item.menuItemRepresentation,
+//            let itemToDelete = menuItems.firstIndex(of: menuItemRep)
+//            else { return }
+//        
+//        menuItems.remove(at: itemToDelete)
+//        menuItemRef.child("\(menuItemRep.id)").removeValue()
+//    }
     
     func operatorSignUp(truckOperator: Foodie, completion: @escaping (Error?) -> Void) {
         let registerOperatorURL = baseURL.appendingPathComponent("auth/register/operators")

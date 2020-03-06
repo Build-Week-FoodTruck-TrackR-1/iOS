@@ -93,7 +93,7 @@ extension MyTrucksViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             let truck = fetchedResultsController.object(at: indexPath)
             foodTruckController?.deleteTruck(truck: truck)
-            foodTruckController?.deleteFoodTruck(for: truck)
+//            foodTruckController?.deleteFoodTruck(for: truck)
         }
     }
     

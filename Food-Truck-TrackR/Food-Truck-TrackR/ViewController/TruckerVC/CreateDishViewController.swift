@@ -47,8 +47,8 @@ class CreateDishViewController: UIViewController, UITextFieldDelegate, UITextVie
         if let data = addDishImageView.image?.jpegData(compressionQuality: 1.0) {
             let itemRep = MenuItemRepresentation(name: name, price: Double(price)!, description: description, id: UUID(), images: data, customerRatings: [5], ratingAvg: 4.6)
             let item = MenuItem(menuItemRepresentation: itemRep)!
-            try! CoreDataStack.shared.save()
-            foodTruckController?.addMenuItem(item: item)
+            foodTruckController?.saveToPersistentStore()
+//            foodTruckController?.addMenuItem(item: item)
         }
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)

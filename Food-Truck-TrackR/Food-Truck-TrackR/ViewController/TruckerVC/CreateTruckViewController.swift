@@ -55,7 +55,7 @@ class CreateTruckViewController: UIViewController, UITextFieldDelegate {
             let truckRep = TruckRepresentation(id: UUID(), name: name, image: data, cuisineType: cuisineType, address: address, customerRatings: [5], ratingAvg: 5)
             
             let truck = Truck(truckRepresentation: truckRep)!
-            foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
+//            foodTruckController?.addFoodTruck(operatorID: bearer.id, with: truck)
         }
         
         
