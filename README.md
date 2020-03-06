@@ -1,4 +1,4 @@
-# FuckTruck TrackR -1 iOS App.
+# FoodTruck TrackR iOS App.
 
 ![FoodTruck_Graphic](https://user-images.githubusercontent.com/50033125/76112657-9bbda000-5fb0-11ea-9618-12bc3df3eb56.png)
 # Introduction: 
@@ -12,9 +12,9 @@ Every true "foodie" worth their salt knows that some of the best food in any cit
 
 # Team members:
 
-- [Micheal ,iOS 13](https://github.com/maybemichael)
-- [Kerby ,iOS 14](https://github.com/Jkurbs)
-- [Nick ,iOS 14](https://github.com/tonic2000)
+- [Michael, iOS13](https://github.com/maybemichael)
+- [Kerby, iOS14](https://github.com/Jkurbs)
+- [Nick, iOS14](https://github.com/tonic2000)
 
 
 # Misc:
