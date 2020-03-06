@@ -13,7 +13,7 @@ Every true "foodie" worth their salt knows that some of the best food in any cit
 # Team members:
 
 - [Micheal iOS 13](https://github.com/maybemichael)
-- [Kerby iOS 14] (https://github.com/Jkurbs)
+- [Kerby iOS 14](https://github.com/Jkurbs)
 - [Nick Nguyen iOS 14](https://github.com/tonic2000)
 
 
