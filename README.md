@@ -3,7 +3,7 @@
 
 
 
-# Technology:
+# Technology Used:
 - Core Data
 - Map Kit 
 - Firebase 
@@ -11,7 +11,9 @@
 
 # Team members:
 
-- @tonic2000
+- Micheal iOS 13
+- Kerby iOS 14
+- Nick Nguyen iOS 14
 
 
 
